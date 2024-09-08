@@ -1,21 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/products.service';
+import { ProductInterface } from './interface/products.interface';
 
-interface Product {
-  id: number;
-  name_product: string;
-  description: string;
-  price: number;
-  available_quantity: number;
-  images: string;
-  status: string;
-  category: {
-    id: number;
-    name_category: string;
-    parent_category: number;
-  };
-}
 
 @Component({
   selector: 'app-products',
@@ -25,7 +12,7 @@ interface Product {
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products: Product[] = [];
+  products: ProductInterface[] = [];
   loading = false;
   error: string | null = null;
 

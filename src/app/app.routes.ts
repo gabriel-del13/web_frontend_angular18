@@ -4,9 +4,23 @@ import { MainComponent } from './components/main/main.component';
 
 import { ServicesComponent } from './components/services/services.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import { ContactComponent } from './components/main/pages/contact/contact.component';
+import { AboutComponent } from './components/main/pages/about/about.component';
+import { LocationComponent } from './components/main/pages/location/location.component';
+import { HeaderComponent } from './components/main/pages/header/header.component';
 
 export const routes: Routes = [
-  { path: '', component: MainComponent },
+  { 
+    path: '', 
+    children: [
+      { path:'', component: MainComponent},
+      { path:'header', component: HeaderComponent},
+      { path:'about-us', component: AboutComponent},
+      { path:'location', component: LocationComponent},
+      { path:'contact', component: ContactComponent},
+
+    ]
+  },
   /*
   { 
     path: 'users', 

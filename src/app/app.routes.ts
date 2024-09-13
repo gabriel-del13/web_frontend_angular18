@@ -4,12 +4,10 @@ import { MainComponent } from './components/main/main.component';
 
 import { ServicesComponent } from './components/services/services.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
-import { ContactComponent } from './components/main/pages/footer/contact/contact.component';
-import { AboutComponent } from './components/main/pages/sections/about/about.component';
-import { LocationComponent } from './components/main/pages/footer/location/location.component';
-import { HeaderComponent } from './components/main/pages/header/header.component';
+import { HeaderComponent } from './components/main/pages/header/header.component'; 
 import { FooterComponent } from './components/main/pages/footer/footer.component';
 import { HeroComponent } from './components/main/pages/header/hero/hero.component';
+import { LocationComponent } from './components/main/pages/sections/location/location.component';
 
 export const routes: Routes = [
   { 

@@ -4,10 +4,12 @@ import { MainComponent } from './components/main/main.component';
 
 import { ServicesComponent } from './components/services/services.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
-import { ContactComponent } from './components/main/pages/contact/contact.component';
-import { AboutComponent } from './components/main/pages/about/about.component';
-import { LocationComponent } from './components/main/pages/location/location.component';
+import { ContactComponent } from './components/main/pages/footer/contact/contact.component';
+import { AboutComponent } from './components/main/pages/sections/about/about.component';
+import { LocationComponent } from './components/main/pages/footer/location/location.component';
 import { HeaderComponent } from './components/main/pages/header/header.component';
+import { FooterComponent } from './components/main/pages/footer/footer.component';
+import { HeroComponent } from './components/main/pages/header/hero/hero.component';
 
 export const routes: Routes = [
   { 
@@ -15,9 +17,9 @@ export const routes: Routes = [
     children: [
       { path:'', component: MainComponent},
       { path:'header', component: HeaderComponent},
-      { path:'about-us', component: AboutComponent},
-      { path:'location', component: LocationComponent},
-      { path:'contact', component: ContactComponent},
+      { path:'hero', component: HeroComponent},
+
+
 
     ]
   },
@@ -42,6 +44,15 @@ export const routes: Routes = [
   
   { path: 'services', component: ServicesComponent },
   { path: 'favorites', component: FavoritesComponent },
-  { path: '**', redirectTo: '' }
+
+  {
+    path: 'footer',
+    children: [
+      {path:'', component: FooterComponent},
+      { path:'location', component: LocationComponent},
+    ]
+  },
+
+  { path: '**', redirectTo: '' },
    
 ];

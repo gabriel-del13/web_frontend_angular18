@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/products.service';
 import { ProductInterface } from './interface/products.interface';
+import { HeaderComponent } from "../main/pages/header/header.component";
+import { FooterComponent } from "../main/pages/footer/footer.component";
 
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent, FooterComponent],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })

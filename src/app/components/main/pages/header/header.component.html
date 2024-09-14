@@ -1,8 +1,8 @@
 <!-- nav bar section -->
-<nav class="flex flex-wrap items-center justify-between p-3 bg-[#deb8bb]">
+<nav class="flex flex-wrap items-center justify-between p-3 bg-[#deb8bb]" id="header">
     <a href="#" class="flex items-center">
       <img src="https://www.svgrepo.com/show/491983/game-card.svg" class="h-6 mr-3 sm:h-9" alt="Gaming Logo">
-      <div class="text-xl">Gaming</div>
+      <div class="text-xl" >Gaming</div>
     </a>
     <div class="flex md:hidden">
       <button id="hamburger" (click)="toggleMenu()">
@@ -13,7 +13,7 @@
     <div class="toggle w-full md:w-auto md:flex text-right text-bold mt-5 md:mt-0 md:border-none" [class.hidden]="isMenuHidden">
       <a routerLink="/main" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Inicio</a>
       <a routerLink="/products" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Productos</a>
-      <a href="#Services" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Servicios</a>
+      <a href="#services" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Servicios</a>
       <a href="#aboutus" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Sobre Nosotros</a>
     </div>
   

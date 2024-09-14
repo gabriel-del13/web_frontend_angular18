@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '../../services/products.service';
+import { ProductService } from '../../services/apps/products.service';
 import { ProductInterface } from './interface/products.interface';
 import { HeaderComponent } from "../main/pages/header/header.component";
 import { FooterComponent } from "../main/pages/footer/footer.component";

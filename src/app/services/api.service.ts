@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -12,16 +12,24 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   private getHeaders(): HttpHeaders {
-
     return new HttpHeaders({
       'Content-Type': 'application/json',
-
     });
   }
 
-  get(endpoint: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${endpoint}`, { headers: this.getHeaders() })
-      .pipe(catchError(this.handleError));
+  get(endpoint: string, params?: {[param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>}): Observable<any> {
+    let httpParams = new HttpParams();
+    if (params) {
+      Object.keys(params).forEach(key => {
+        httpParams = httpParams.set(key, params[key].toString());
+      });
+    }
+
+    return this.http.get(`${this.apiUrl}/${endpoint}`, { 
+      headers: this.getHeaders(),
+      params: httpParams
+    })
+    .pipe(catchError(this.handleError));
   }
 
   post(endpoint: string, data: any): Observable<any> {

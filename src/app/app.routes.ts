@@ -8,6 +8,8 @@ import { HeaderComponent } from './components/main/pages/header/header.component
 import { FooterComponent } from './components/main/pages/footer/footer.component';
 import { HeroComponent } from './components/main/pages/header/hero/hero.component';
 import { LocationComponent } from './components/main/pages/sections/location/location.component';
+import { LoginComponent } from './components/users/login/login.component';
+import { RegisterComponent } from './components/users/register/register.component';
 
 export const routes: Routes = [
   { 
@@ -21,14 +23,13 @@ export const routes: Routes = [
 
     ]
   },
-  /*
-  { 
+  {
     path: 'users', 
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent }
     ]
-  },*/
+  },
   { 
     path: 'products', 
     children: [

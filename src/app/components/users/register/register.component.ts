@@ -139,7 +139,8 @@ export class RegisterComponent{
   onRegister() {
     this.errorMessage = '';
     this.successMessage = '';
-
+    this.validationErrors = {}; // Resetear errores previos
+  
     // Validar todos los campos antes de enviar
     Object.keys(this.registerCredentials).forEach(field => this.validateField(field));
     
@@ -148,7 +149,7 @@ export class RegisterComponent{
       this.errorMessage = 'Por favor, corrige los errores en el formulario.';
       return;
     }
-
+  
     this.registerService.register(this.registerCredentials).subscribe({
       next: (response) => {
         console.log('Registro exitoso', response);
@@ -175,19 +176,33 @@ export class RegisterComponent{
   }
 
   private handleErrorResponse(error: any) {
+    this.validationErrors = {}; // Resetear errores previos
+    this.errorMessage = '';
+  
     if (error.error && typeof error.error === 'object') {
-      if (error.error.email){
+      Object.entries(error.error).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          this.validationErrors[key] = value[0]; // Tomar el primer mensaje de error
+        } else if (typeof value === 'string') {
+          this.validationErrors[key] = value;
+        }
+      });
+  
+      if (this.validationErrors['email']) {
         this.validationErrors['email'] = "Error: Email ya registrado.";
-
-      }else {
-        this.errorMessage = Object.entries(error.error)
-          .map(([key, value]) => `${this.fieldNames[key] || key}: ${value}`)
-          .join('\n');
       }
-    } else if (error.error) {
+  
+      // Si hay errores que no son de campos específicos, agregarlos al mensaje de error general
+      if (error.error.non_field_errors) {
+        this.errorMessage = error.error.non_field_errors.join(', ');
+      }
+    } else if (typeof error.error === 'string') {
       this.errorMessage = error.error;
     } else {
       this.errorMessage = 'Ocurrió un error durante el registro. Por favor, inténtalo de nuevo.';
     }
+  
+    console.error('Errores de validación:', this.validationErrors);
+    console.error('Mensaje de error general:', this.errorMessage);
   }
 }

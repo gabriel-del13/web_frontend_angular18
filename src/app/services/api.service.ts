@@ -48,7 +48,17 @@ export class ApiService {
   }
 
   private handleError(error: any) {
-    console.error('An error occurred:', error);
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    console.error('Error HTTP:', error);
+    if (error.error instanceof ErrorEvent) {
+      // Error del lado del cliente o de red
+      console.error('Error:', error.error.message);
+    } else {
+      // El backend retornó un código de respuesta sin éxito.
+      console.error(
+        `Backend retornó código ${error.status}, ` +
+        `body was: ${JSON.stringify(error.error)}`);
+    }
+    // Retorna un observable con un mensaje de error orientado al usuario
+    return throwError(() => error);
   }
 }

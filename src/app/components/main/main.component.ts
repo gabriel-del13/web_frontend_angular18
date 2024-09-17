@@ -10,6 +10,7 @@ import { AboutComponent } from "./pages/sections/about/about.component";
 import { LocationComponent } from "./pages/sections/location/location.component";
 import { LogoGridComponent } from './pages/logo-grid/logo-grid.component';
 import { GalleryComponent } from "./pages/sections/gallery/gallery.component";
+import { ScrollButtonComponent } from "./pages/footer/scroll-button/scroll-button.component";
 
 
 @Component({
@@ -19,7 +20,8 @@ import { GalleryComponent } from "./pages/sections/gallery/gallery.component";
     RouterModule, HeaderComponent, FooterComponent, HeroComponent,
     ServicesComponent, SectionproductsComponent, SectionservicesComponent,
     AboutComponent, LocationComponent, LogoGridComponent,
-    GalleryComponent
+    GalleryComponent,
+    ScrollButtonComponent
 ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'

@@ -16,18 +16,12 @@ export const routes: Routes = [
     path: '', 
     children: [
       { path:'', component: MainComponent},
-      { path:'header', component: HeaderComponent},
-      { path:'hero', component: HeroComponent},
-
-
-
     ]
   },
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
     
-  
   { 
     path: 'products', 
     children: [
@@ -42,13 +36,6 @@ export const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'favorites', component: FavoritesComponent },
 
-  {
-    path: 'footer',
-    children: [
-      {path:'', component: FooterComponent},
-      { path:'location', component: LocationComponent},
-    ]
-  },
 
   { path: '**', redirectTo: '' },
    

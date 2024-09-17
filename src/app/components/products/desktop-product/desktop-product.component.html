@@ -1,0 +1,31 @@
+<div *ngIf="loading">Loading products...</div>
+<div *ngIf="error">{{ error }}</div>
+<table *ngIf="!loading && !error" class="w-full border-collapse border border-gray-300">
+  <thead>
+    <tr class="bg-gray-100">
+      <th class="p-2 border border-gray-300">Image</th>
+      <th class="p-2 border border-gray-300">Name</th>
+      <th class="p-2 border border-gray-300">Description</th>
+      <th class="p-2 border border-gray-300">Price</th>
+      <th class="p-2 border border-gray-300">Quantity</th>
+      <th class="p-2 border border-gray-300">Status</th>
+      <th class="p-2 border border-gray-300">Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products" class="hover:bg-gray-50">
+      <td class="p-2 border border-gray-300">
+        <img *ngIf="product.images && product.images.length > 0" 
+          [src]="product.images[0].image_url" 
+          [alt]="product.name_product" 
+          class="w-16 h-16 object-cover">
+      </td>
+      <td class="p-2 border border-gray-300">{{ product.name_product }}</td>
+      <td class="p-2 border border-gray-300">{{ product.description }}</td>
+      <td class="p-2 border border-gray-300">{{ product.price | currency }}</td>
+      <td class="p-2 border border-gray-300">{{ product.available_quantity }}</td>
+      <td class="p-2 border border-gray-300">{{ product.status }}</td>
+      <td class="p-2 border border-gray-300">{{ product.category.name_category }}</td>
+    </tr>
+  </tbody>
+</table>

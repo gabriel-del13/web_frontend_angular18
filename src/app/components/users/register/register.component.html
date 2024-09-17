@@ -1,221 +1,196 @@
-
 <div class="min-h-screen bg-gray-100 dark:bg-zinc-950 text-gray-900 flex justify-center">
-    <div class="max-w-screen-xl m-0 sm:m-4 bg-white dark:bg-gray-600 shadow sm:rounded-lg flex justify-center flex-1">
-        <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-2">
-            <div class=" flex justify-center">
-                <div class="flex flex-wrap rounded-full items-center justify-between p-3 bg-[#64a0fd] dark:bg-gray-800" id="header">
-                    <div class="flex items-center">
-                        <a href="#" class="flex items-center">
-                            <img src="https://www.svgrepo.com/show/491983/game-card.svg" class="h-6 mr-2 sm:h-9" alt="Gaming Logo">
-                            <div class="text-2xl font-bold dark:text-white">Gaming</div>
-                        </a>
-                        <app-dark-mode-toggle class="ml-2"></app-dark-mode-toggle>
-                    </div>
-                </div>
+  <div class="max-w-screen-xl m-0 sm:m-4 bg-white dark:bg-gray-600 shadow sm:rounded-lg flex justify-center flex-1">
+    <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-2">
+      <div class=" flex justify-center">
+        <div class="flex flex-wrap rounded-full items-center justify-between p-3 bg-[#64a0fd] dark:bg-gray-800"
+          id="header">
+          <div class="flex items-center">
+            <a href="#" class="flex items-center">
+              <img src="https://www.svgrepo.com/show/491983/game-card.svg" class="h-6 mr-2 sm:h-9" alt="Gaming Logo">
+              <div class="text-2xl font-bold dark:text-white">Gaming</div>
+            </a>
+            <app-dark-mode-toggle class="ml-2"></app-dark-mode-toggle>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 flex flex-col items-center">
+        <h1 class="text-2xl xl:text-3xl font-extrabold dark:text-white">
+          Register
+        </h1>
+        <div class="w-full flex-1 mt-8">
+          <div class="flex flex-col items-center">
+            <button
+              class="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 hover:bg-indigo-300 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+              <div class="bg-white p-2 rounded-full">
+                <svg class="w-4" viewBox="0 0 533.5 544.3">
+                  <path
+                    d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
+                    fill="#4285f4" />
+                  <path
+                    d="M272.1 544.3c73.4 0 135.3-24.1 180.4-65.7l-87.7-68c-24.4 16.6-55.9 26-92.6 26-71 0-131.2-47.9-152.8-112.3H28.9v70.1c46.2 91.9 140.3 149.9 243.2 149.9z"
+                    fill="#34a853" />
+                  <path d="M119.3 324.3c-11.4-33.8-11.4-70.4 0-104.2V150H28.9c-38.6 76.9-38.6 167.5 0 244.4l90.4-70.1z"
+                    fill="#fbbc04" />
+                  <path
+                    d="M272.1 107.7c38.8-.6 76.3 14 104.4 40.8l77.7-77.7C405 24.6 339.7-.8 272.1 0 169.2 0 75.1 58 28.9 150l90.4 70.1c21.5-64.5 81.8-112.4 152.8-112.4z"
+                    fill="#ea4335" />
+                </svg>
+              </div>
+              <span class="ml-4">
+                Register with Google
+              </span>
+            </button>
+          </div>
+          <div class="my-2 border-b text-center">
+            <div
+              class="leading-none px-2 inline-block text-sm text-gray-600 dark:text-white tracking-wide font-medium ">
+              Or
             </div>
-            <div class="mt-6 flex flex-col items-center">
-                <h1 class="text-2xl xl:text-3xl font-extrabold dark:text-white">
-                    Register
-                </h1>
-                <div class="w-full flex-1 mt-8">
-                    <div class="flex flex-col items-center">
-                        <button class="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 hover:bg-indigo-300 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
-                            <div class="bg-white p-2 rounded-full">
-                                <svg class="w-4" viewBox="0 0 533.5 544.3">
-                                    <path d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z" fill="#4285f4" />
-                                    <path d="M272.1 544.3c73.4 0 135.3-24.1 180.4-65.7l-87.7-68c-24.4 16.6-55.9 26-92.6 26-71 0-131.2-47.9-152.8-112.3H28.9v70.1c46.2 91.9 140.3 149.9 243.2 149.9z" fill="#34a853" />
-                                    <path d="M119.3 324.3c-11.4-33.8-11.4-70.4 0-104.2V150H28.9c-38.6 76.9-38.6 167.5 0 244.4l90.4-70.1z" fill="#fbbc04" />
-                                    <path d="M272.1 107.7c38.8-.6 76.3 14 104.4 40.8l77.7-77.7C405 24.6 339.7-.8 272.1 0 169.2 0 75.1 58 28.9 150l90.4 70.1c21.5-64.5 81.8-112.4 152.8-112.4z" fill="#ea4335" />
-                                </svg>
-                            </div>
-                            <span class="ml-4">
-                            Register with Google
-                            </span>
-                        </button>
-                    </div>
-                    <div class="my-2 border-b text-center">
-                        <div class="leading-none px-2 inline-block text-sm text-gray-600 dark:text-white tracking-wide font-medium ">
-                        Or 
-                        </div>
-                    </div>
-                    <div class="mx-auto max-w-xs">
-                        <form class="space-y-6" (ngSubmit)="onRegister()">
-                            <div>
-                              <label class="block text-sm font-medium text-gray-700 dark:text-white">Nombre*</label>
-                              <div class="mt-1">
-                                <input 
-                                  name="first_name" 
-                                  type="text" 
-                                  maxlength="20"
-                                  [(ngModel)]="registerCredentials.first_name" 
-                                  (ngModelChange)="validateField('first_name')"
-                                  required
-                                  [ngClass]="{
+          </div>
+          <div class="mx-auto max-w-xs">
+            <form class="space-y-6" (ngSubmit)="onRegister()">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-white">Nombre*</label>
+                <div class="mt-1">
+                  <input name="first_name" type="text" maxlength="20" [(ngModel)]="registerCredentials.first_name"
+                    (ngModelChange)="validateField('first_name')" required [ngClass]="{
                                     'border-red-500': validationErrors['first_name'],
                                     'border-green-500': isFieldValid('first_name')
                                   }"
-                                  class="px-2 py-3 mt-1 block w-full rounded-md border shadow-sm focus:outline-none focus:ring-sky-500 sm:text-sm" 
-                                />
-                              </div>
-                              @if (validationErrors['first_name']) {
-                                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ validationErrors['first_name'] }}</p>
-                              }
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-white">Apellido*</label>
-                                <div class="mt-1">
-                                    <input 
-                                    name="last_name"
-                                     type="last_name" 
-                                     maxlength="20" 
-                                    [(ngModel)]="registerCredentials.last_name" 
-                                    required
-                                    (ngModelChange)="validateField('last_name')"
-                                    required
-                                    [ngClass]="{
+                    class="px-2 py-3 mt-1 block w-full rounded-md border shadow-sm focus:outline-none focus:ring-sky-500 sm:text-sm" />
+                </div>
+                @if (validationErrors['first_name']) {
+                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ validationErrors['first_name'] }}</p>
+                }
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-white">Apellido*</label>
+                <div class="mt-1">
+                  <input name="last_name" type="last_name" maxlength="20" [(ngModel)]="registerCredentials.last_name"
+                    required (ngModelChange)="validateField('last_name')" required [ngClass]="{
                                       'border-red-500': validationErrors['last_name'],
                                       'border-green-500': isFieldValid('last_name')
                                     }"
-                                    class="px-2 py-3 mt-1 block w-full rounded-md border shadow-sm focus:outline-none focus:ring-sky-500 sm:text-sm" 
-                                  />
-                                </div>
-                                @if (validationErrors['last_name']) {
-                                  <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ validationErrors['last_name'] }}</p>
-                                }
-                            </div>
-            
-                            <div>
-                                <label  class="block text-sm font-medium text-gray-700 dark:text-white">Email*</label>
-                                <div class="mt-1">
-                                    <input name="email" type="email"  [(ngModel)]="registerCredentials.email" 
-                                    placeholder="example@google.com" 
-                                    required
-                                    [(ngModel)]="registerCredentials.email" 
-                                    required
-                                    (ngModelChange)="validateField('email')"
-                                    [ngClass]="{
+                    class="px-2 py-3 mt-1 block w-full rounded-md border shadow-sm focus:outline-none focus:ring-sky-500 sm:text-sm" />
+                </div>
+                @if (validationErrors['last_name']) {
+                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ validationErrors['last_name'] }}</p>
+                }
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-white">Email*</label>
+                <div class="mt-1">
+                  <input name="email" type="email" [(ngModel)]="registerCredentials.email"
+                    placeholder="example@google.com" required [(ngModel)]="registerCredentials.email" required
+                    (ngModelChange)="validateField('email')" [ngClass]="{
                                       'border-red-500': validationErrors['email'],
                                       'border-green-500': isFieldValid('email')
                                     }"
-                                    class="px-2 py-3 mt-1 block w-full rounded-md border shadow-sm focus:outline-none focus:ring-sky-500 sm:text-sm" 
-                                  />
-                                </div>
-                                @if (validationErrors['email']) {
-                                  <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ validationErrors['email'] }}</p>
-                                }
-                            </div>
+                    class="px-2 py-3 mt-1 block w-full rounded-md border shadow-sm focus:outline-none focus:ring-sky-500 sm:text-sm" />
+                </div>
+                @if (validationErrors['email']) {
+                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ validationErrors['email'] }}</p>
+                }
+              </div>
 
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-white">Phone number</label>
-                                <div class="relative mt-2 max-w-xs text-gray-500">
-                                    <div class="absolute inset-y-0 left-3 my-auto h-6 flex items-center border-r pr-2">
-                                        <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r">+507</div>
-                                  </div>
-                                  <input 
-                                    name="phone_number" 
-                                    type="tel" 
-                                    placeholder="12345678" 
-                                    pattern="\d{8}" 
-                                    maxlength="8"
-                                    [(ngModel)]="registerCredentials.phone_number"  
-                                    (input)="onPhoneNumberInput($event)"
-                                    [ngClass]="{
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-white">Phone number</label>
+                <div class="relative mt-2 max-w-xs text-gray-500">
+                  <div class="absolute inset-y-0 left-3 my-auto h-6 flex items-center border-r pr-2">
+                    <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r">+507</div>
+                  </div>
+                  <input name="phone_number" type="tel" placeholder="12345678" pattern="\d{8}" maxlength="8"
+                    [(ngModel)]="registerCredentials.phone_number" (input)="onPhoneNumberInput($event)" [ngClass]="{
                                       'border-red-500': validationErrors['phone_number'],
                                       'border-green-500': isFieldValid('phone_number')
                                     }"
-                                    class="w-full pl-[4.5rem] px-2 py-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
-                                  />
-                                </div>
-                                @if (validationErrors['phone_number']) {
-                                  <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ validationErrors['phone_number'] }}</p>
-                                }
-                              </div>
-                            
-                              <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-white">Contraseña*</label>
-                                <div class="mt-1">
-                                  <input 
-                                    name="password" 
-                                    type="password" 
-                                    [(ngModel)]="registerCredentials.password" 
-                                    (ngModelChange)="validateField('password')"
-                                    autocomplete="new-password" 
-                                    required
-                                    [ngClass]="{
+                    class="w-full pl-[4.5rem] px-2 py-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm" />
+                </div>
+                @if (validationErrors['phone_number']) {
+                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ validationErrors['phone_number'] }}</p>
+                }
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-white">Contraseña*</label>
+                <div class="mt-1">
+                  <input name="password" type="password" [(ngModel)]="registerCredentials.password"
+                    (ngModelChange)="validateField('password')" autocomplete="new-password" required [ngClass]="{
                                       'border-red-500': validationErrors['password'],
                                       'border-green-500': isFieldValid('password')
                                     }"
-                                    class="px-2 py-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm" 
-                                  />
-                                </div>
-                                @if (validationErrors['password']) {
-                                  <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ validationErrors['password'] }}</p>
-                                }
-                              </div>
-                            
-                              <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-white">Confirmar Contraseña*</label>
-                                <div class="mt-1">
-                                  <input 
-                                    name="password_confirmation" 
-                                    type="password" 
-                                    [(ngModel)]="registerCredentials.password_confirmation"
-                                    (ngModelChange)="validateField('password_confirmation')"
-                                    autocomplete="new-password"
-                                    required
-                                    [ngClass]="{
+                    class="px-2 py-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm" />
+                </div>
+                @if (validationErrors['password']) {
+                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ validationErrors['password'] }}</p>
+                }
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-white">Confirmar Contraseña*</label>
+                <div class="mt-1">
+                  <input name="password_confirmation" type="password"
+                    [(ngModel)]="registerCredentials.password_confirmation"
+                    (ngModelChange)="validateField('password_confirmation')" autocomplete="new-password" required
+                    [ngClass]="{
                                       'border-red-500': validationErrors['password_confirmation'],
                                       'border-green-500': isFieldValid('password_confirmation')
                                     }"
-                                    class="px-2 py-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm" 
-                                  />
-                                </div>
-                                @if (validationErrors['password_confirmation']) {
-                                  <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ validationErrors['password_confirmation'] }}</p>
-                                }
-                              </div>
-                            @if (errorMessage) {
-                                <div class="error-message bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                                  <strong class="font-bold">Error: </strong>
-                                  <span class="block sm:inline">{{ errorMessage }}</span>
-                                </div>
-                              }
-                            
-                              @if (successMessage) {
-                                <div class="success-message bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                                  <strong class="font-bold">Éxito: </strong>
-                                  <span class="block sm:inline">{{ successMessage }}</span>
-                                </div>
-                              }
-                        
-                            <button type="submit" class="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
-                                </svg>
-                                <span class="ml-3">
-                                    Sign up
-                                </span>
-                            </button>
-                        </form>
-                        <div class="my-4 text-gray-600 dark:text-white text-center">
-                            Or
-                        </div>
-                        <div routerLink="/login" class="mt-4 flex items-center justify-between">
-                            <span class="border-b w-1/5 md:w-1/4"></span>
-                            <button class="px-2 py-1 bg-indigo-500  text-white rounded-full hover:bg-indigo-700 ">
-                                <a  class="text-xs text-white  uppercase">Log in</a>
-                            </button>
-                            <span class="border-b w-1/5 md:w-1/4"></span>
-                        </div>
-                    </div>
+                    class="px-2 py-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm" />
                 </div>
+                @if (validationErrors['password_confirmation']) {
+                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ validationErrors['password_confirmation'] }}
+                </p>
+                }
+              </div>
+              @if (errorMessage) {
+              <div class="error-message bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                role="alert">
+                <strong class="font-bold">Error: </strong>
+                <span class="block sm:inline">{{ errorMessage }}</span>
+              </div>
+              }
+
+              @if (successMessage) {
+              <div
+                class="success-message bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+                role="alert">
+                <strong class="font-bold">Éxito: </strong>
+                <span class="block sm:inline">{{ successMessage }}</span>
+              </div>
+              }
+
+              <button type="submit"
+                class="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+                </svg>
+                <span class="ml-3">
+                  Sign up
+                </span>
+              </button>
+            </form>
+            <div class="my-4 text-gray-600 dark:text-white text-center">
+              Or
             </div>
+            <div routerLink="/login" class="mt-4 flex items-center justify-between">
+              <span class="border-b w-1/5 md:w-1/4"></span>
+              <button class="px-2 py-1 bg-indigo-500  text-white rounded-full hover:bg-indigo-700 ">
+                <a class="text-xs text-white  uppercase">Log in</a>
+              </button>
+              <span class="border-b w-1/5 md:w-1/4"></span>
+            </div>
+          </div>
         </div>
-      <!-- 
+      </div>
+    </div>
+    <!-- 
       <div class="flex-1 bg-indigo-100 text-center hidden lg:flex">
         <div class="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat" style="background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');">
         </div>
       </div>
         -->
-    </div>
+  </div>
 </div>

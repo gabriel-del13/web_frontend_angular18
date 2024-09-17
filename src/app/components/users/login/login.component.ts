@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { LoginService } from '../../../services/users/login.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { DarkModeToggleComponent } from '../../main/pages/header/dark-mode-toggle/dark-mode-toggle.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule,],
+  imports: [CommonModule, FormsModule, DarkModeToggleComponent, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -21,7 +22,6 @@ export class LoginComponent {
     private router: Router,
   ) { }
   
-  // Ejemplo de login
   onLogin() {
     this.loginService.login(this.loginCredentials).subscribe({
       next: (response) => {

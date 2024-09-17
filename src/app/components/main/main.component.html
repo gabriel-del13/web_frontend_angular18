@@ -1,33 +1,38 @@
 
+
 <!-- nav bar -->
 <app-header></app-header>
-
 <!-- hero seciton -->
 <app-hero> </app-hero>
 
-<br>
-<!-- Search -->
-<h2 class="text-grey-700 font-medium text-3xl md:text-3xl leading-tight mb-2 flex justify-center">¿Buscas Algo En Especifico?</h2>
-<div class="  w-screen flex justify-center items-center">
-    <form action="/search" class="max-w-[480px] w-full px-4">
-        <div class="relative">
-            <input type="text" name="q" class="w-full border h-12 shadow p-4 rounded-full dark:text-gray-800 dark:border-gray-700 dark:bg-gray-200" placeholder="Juegos...">
-            <button type="submit">
-                <svg class="text-teal-400 h-5 w-5 absolute top-3.5 right-3 fill-current dark:text-teal-300"
-                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                    x="0px" y="0px" viewBox="0 0 56.966 56.966"
-                    style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve">
-                    <path
-                        d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z">
-                    </path>
-                </svg>
-            </button>
-        </div>
-    </form>
+<div class="dark:bg-gray-800">
+    <br>
+
+    <!-- Search -->
+    <h2 class="text-grey-700 font-medium text-3xl md:text-3xl leading-tight mb-2 flex justify-center dark:text-white">¿Buscas Algo En Especifico?</h2>
+    <div class="  w-screen flex justify-center items-center">
+        <form action="/search" class="max-w-[480px] w-full px-4">
+            <div class="relative">
+                <input type="text" name="q" class="w-full border-4 h-12 shadow-xl dark:shadow-gray-950 p-6 rounded-full dark:text-gray-800 dark:border-gray-900 dark:bg-gray-200" placeholder="Juegos...">
+                <button type="submit">
+                    <svg class="text-teal-400 h-5 w-5 absolute top-3.5 right-3 fill-current dark:text-teal-300"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                        x="0px" y="0px" viewBox="0 0 56.966 56.966"
+                        style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve">
+                        <path
+                            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <app-logo-grid> </app-logo-grid>
+    <br>
 </div>
-<br>
 <!-- our products section-->
-<section class="bg-gray-100"> 
+<section class="bg-gray-100 dark:bg-[#151c25]"> 
     <app-sectionproducts></app-sectionproducts>
     <div class="flex justify-center items-center">
         <a href="" target="_blank" class="inline-flex justify-center items-center rounded cursor-pointer bg-[#273ef1]
@@ -38,68 +43,17 @@
     <br>
 </section>
 <!-- our services section -->
-<app-sectionservices></app-sectionservices>
-
+<section class="dark:bg-[#1f2937]"> 
+    <app-sectionservices></app-sectionservices>
+</section>
 <!-- about us -->
-<app-about></app-about>
-
+<section class="bg-gray-100 dark:bg-[#151c25]" id="aboutus">
+    <app-about></app-about>
+</section>
 <!-- why us  -->
 
-
 <!-- gallery -->
-<section class="text-gray-700 body-font" id="gallery">
-  <div class="flex justify-center text-3xl font-bold text-gray-800 text-center py-10">
-      Gallery
-  </div>
-
-  <div class="grid grid-cols-1 place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-
-      <div class="group relative">
-          <img
-    src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxuYXR1cmV8ZW58MHwwfHx8MTY5NDA5OTcyOXww&ixlib=rb-4.0.3&q=80&w=1080"
-    alt="Image 1"
-    class="aspect-[2/3] h-80 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
-  />
-      </div>
-
-      <div class="group relative">
-          <img
-    src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxuYXR1cmV8ZW58MHwwfHx8MTY5NDA5OTcyOXww&ixlib=rb-4.0.3&q=80&w=1080"
-    alt="Image 1"
-    class="aspect-[2/3] h-80 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
-  />
-      </div>
-
-      <div class="group relative">
-          <img
-    src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxuYXR1cmV8ZW58MHwwfHx8MTY5NDA5OTcyOXww&ixlib=rb-4.0.3&q=80&w=1080"
-    alt="Image 1"
-    class="aspect-[2/3] h-80 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
-  />
-      </div>
-      <div class="group relative">
-          <img
-    src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxuYXR1cmV8ZW58MHwwfHx8MTY5NDA5OTcyOXww&ixlib=rb-4.0.3&q=80&w=1080"
-    alt="Image 1"
-    class="aspect-[2/3] h-80 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
-  />
-      </div>
-
-
-
-      <!-- Repeat this div for each image -->
-  </div>
-
-</section>
-
-<div class="fixed bottom-0 right-0 p-4">
-    <a href="#header" class="bg-gray-800 text-white rounded-full w-10 h-10 flex items-center justify-center" >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-      </svg>
-    </a>
-
-</div>
+<app-gallery></app-gallery>
 <!-- Location -->
 <app-location></app-location>
 

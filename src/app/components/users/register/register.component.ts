@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
 import { RegisterService } from '../../../services/users/register.service';
+import { ValideRegisterService } from '../../../services/users/valideregister.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { DarkModeToggleComponent } from '../../main/pages/header/dark-mode-toggle/dark-mode-toggle.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink, DarkModeToggleComponent],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  
 })
-export class RegisterComponent {
-  registerData = {
+export class RegisterComponent{
+  registerCredentials = {
     email: '',
     first_name: '',
     last_name: '',
@@ -19,46 +22,172 @@ export class RegisterComponent {
     password: '',
     password_confirmation: ''
   };
+
+  validationErrors: { [key: string]: string } = {};
   errorMessage = '';
   successMessage = '';
+  constraints: any;
 
-  constructor(private registerService: RegisterService) {}
+  fieldNames: { [key: string]: string } = {
+    first_name: 'nombre',
+    last_name: 'apellido',
+    email: 'correo electrónico',
+    phone_number: 'número de teléfono',
+    password: 'contraseña',
+    password_confirmation: 'confirmación de contraseña'
+  };
+
+  constructor(
+    private registerService: RegisterService,
+    private valideRegisterService: ValideRegisterService
+  ) {}
+
+  ngOnInit() {
+    this.loadConstraints();
+  }
+
+  loadConstraints() {
+    this.valideRegisterService.getConstraints().subscribe({
+      next: (constraints) => {
+        this.constraints = constraints;
+      },
+      error: (error) => {
+        console.error('Error al cargar las restricciones', error);
+      }
+    });
+  }
+
+  validateField(field: string) {
+    this.validationErrors[field] = '';
+    const value = this.registerCredentials[field as keyof typeof this.registerCredentials];
+    const fieldConstraints = this.constraints[field];
+    const fieldName = this.fieldNames[field] || field;
+
+    if (fieldConstraints) {
+      if (fieldConstraints.min_length && value.length < fieldConstraints.min_length) {
+        this.validationErrors[field] = `El ${fieldName} debe tener al menos ${fieldConstraints.min_length} caracteres.`;
+      } else if (fieldConstraints.max_length && value.length > fieldConstraints.max_length) {
+        this.validationErrors[field] = `El ${fieldName} no debe exceder ${fieldConstraints.max_length} caracteres.`;
+      }
+
+      if (field === 'email' && !value.includes('@')) {
+        this.validationErrors[field] = 'El correo electrónico debe contener "@".';
+      }
+
+      if (field === 'phone_number' && value) {
+        const regex = new RegExp(fieldConstraints.regex.slice(1, -1));
+        if (!regex.test(value)) {
+          this.validationErrors[field] = 'El número de teléfono debe contener 8 dígitos.';
+        }
+      }
+    }
+
+    // Validaciones específicas para contraseña y confirmación
+    if (field === 'password' || field === 'password_confirmation') {
+      this.validatePasswords();
+    }
+  }
+
+  validatePasswords() {
+    const password = this.registerCredentials.password;
+    const confirmation = this.registerCredentials.password_confirmation;
+
+    // Limpiar errores previos
+    this.validationErrors['password'] = '';
+    this.validationErrors['password_confirmation'] = '';
+    
+    // Inicializamos variables para cada tipo de error
+    let lengthError = false;
+    let numberError = false;
+
+    // Validar longitud mínima
+    if (password.length < 8) {
+      lengthError = true;
+    }
+
+    // Validar que contenga al menos 2 números
+    if ((password.match(/\d/g) || []).length < 2) {
+      numberError = true;
+    }
+
+    // Determinar qué mensaje mostrar
+    if (lengthError && numberError) {
+      this.validationErrors['password'] = 'La contraseña debe contener al menos 8 caracteres y 2 números.';
+    } else if (lengthError) {
+      this.validationErrors['password'] = 'La contraseña debe tener al menos 8 caracteres.';
+    } else if (numberError) {
+      this.validationErrors['password'] = 'La contraseña debe contener al menos 2 números.';
+    }
+
+    // Validar que las contraseñas coincidan
+    if (password !== confirmation && confirmation.length > 0) {
+      this.validationErrors['password_confirmation'] = 'Las contraseñas no coinciden.';
+    }
+  }
+
+  isFieldValid(field: string): boolean {
+    return this.registerCredentials[field as keyof typeof this.registerCredentials].length > 0 && !this.validationErrors[field];
+  }
+
+  onPhoneNumberInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/[^0-9]/g, '');
+    this.registerCredentials.phone_number = input.value;
+    this.validateField('phone_number');
+  }
 
   onRegister() {
     this.errorMessage = '';
     this.successMessage = '';
+
+    // Validar todos los campos antes de enviar
+    Object.keys(this.registerCredentials).forEach(field => this.validateField(field));
     
-    if (this.registerData.password !== this.registerData.password_confirmation) {
-      this.errorMessage = 'Passwords do not match.';
+    // Verificar si hay errores de validación
+    if (Object.values(this.validationErrors).some(error => error !== '')) {
+      this.errorMessage = 'Por favor, corrige los errores en el formulario.';
       return;
     }
 
-    this.registerService.register(this.registerData).subscribe({
+    this.registerService.register(this.registerCredentials).subscribe({
       next: (response) => {
-        console.log('Registration successful', response);
-        this.successMessage = 'Registration successful! You can now log in.';
-        // Reset the form
-        this.registerData = {
-          email: '',
-          first_name: '',
-          last_name: '',
-          phone_number: '',
-          password: '',
-          password_confirmation: ''
-        };
+        console.log('Registro exitoso', response);
+        this.successMessage = '¡Registro exitoso! Ahora puedes iniciar sesión.';
+        this.resetForm();
       },
       error: (error) => {
-        console.error('Registration error', error);
-        if (error.error && typeof error.error === 'object') {
-          // Handle structured error responses
-          const errorMessages = Object.entries(error.error)
-            .map(([key, value]) => `${key}: ${value}`)
-            .join('; ');
-          this.errorMessage = `Registration failed: ${errorMessages}`;
-        } else {
-          this.errorMessage = 'Registration failed. Please try again later.';
-        }
+        console.error('Error en el registro', error);
+        this.handleErrorResponse(error);
       }
     });
+  }
+
+  private resetForm() {
+    this.registerCredentials = {
+      email: '',
+      first_name: '',
+      last_name: '',
+      phone_number: '',
+      password: '',
+      password_confirmation: ''
+    };
+    this.validationErrors = {};
+  }
+
+  private handleErrorResponse(error: any) {
+    if (error.error && typeof error.error === 'object') {
+      if (error.error.email){
+        this.validationErrors['email'] = "Error: Email ya registrado.";
+
+      }else {
+        this.errorMessage = Object.entries(error.error)
+          .map(([key, value]) => `${this.fieldNames[key] || key}: ${value}`)
+          .join('\n');
+      }
+    } else if (error.error) {
+      this.errorMessage = error.error;
+    } else {
+      this.errorMessage = 'Ocurrió un error durante el registro. Por favor, inténtalo de nuevo.';
+    }
   }
 }

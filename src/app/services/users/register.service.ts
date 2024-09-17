@@ -11,6 +11,7 @@ export class RegisterService {
   constructor(private apiService: ApiService) { }
 
   register(userData: any): Observable<any> {
+    console.log('Datos Enviados:', userData);
     return this.apiService.post(this.endpoint, userData);
   }
 }

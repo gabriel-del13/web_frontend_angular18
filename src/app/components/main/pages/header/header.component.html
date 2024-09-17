@@ -1,39 +1,47 @@
 <!-- nav bar section -->
-<nav class="flex flex-wrap items-center justify-between p-3 bg-[#deb8bb]" id="header">
+
+<nav class="flex flex-wrap items-center justify-between p-3 bg-[#64a0fd] dark:bg-gray-800" id="header">
+  <div class="flex items-center">
     <a href="#" class="flex items-center">
       <img src="https://www.svgrepo.com/show/491983/game-card.svg" class="h-6 mr-3 sm:h-9" alt="Gaming Logo">
-      <div class="text-xl" >Gaming</div>
+      <div class="text-2xl font-bold dark:text-white">Gaming</div>
     </a>
-    <div class="flex md:hidden">
-      <button id="hamburger" (click)="toggleMenu()">
-        <img class="toggle" [class.hidden]="!isMenuHidden" src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png" width="40" height="40" alt="Open menu" />
-        <img class="toggle" [class.hidden]="isMenuHidden" src="https://img.icons8.com/fluent-systems-regular/2x/close-window.png" width="40" height="40" alt="Close menu" />
-      </button>
-    </div>
-    <div class="toggle w-full md:w-auto md:flex text-right text-bold mt-5 md:mt-0 md:border-none" [class.hidden]="isMenuHidden">
-      <a routerLink="/main" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Inicio</a>
-      <a routerLink="/products" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Productos</a>
-      <a href="#services" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Servicios</a>
-      <a href="#aboutus" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Sobre Nosotros</a>
-    </div>
+
+    <app-dark-mode-toggle class="ml-2"></app-dark-mode-toggle>
+  </div>
+
+
+  <div class="flex custom:hidden">
+    <button id="hamburger" (click)="toggleMenu()">
+      <img class="toggle" [class.hidden]="!isMenuHidden" src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png" width="40" height="40" alt="Open menu" />
+      <img class="toggle" [class.hidden]="isMenuHidden" src="https://img.icons8.com/fluent-systems-regular/2x/close-window.png" width="40" height="40" alt="Close menu" />
+    </button>
+  </div>
+  <div class="toggle w-full custom:w-auto custom:flex text-right font-bold text-lg custom:text-xl mt-5 custom:mt-0 md:border-none" [class.hidden]="isMenuHidden">
+    <a routerLink="/main" class="block md:inline-block hover:text-cyan-200 dark:hover:text-teal-600 px-3 py-3 md:border-none text-gray-900 dark:text-white">Inicio</a>
+    <a routerLink="/products" class="block md:inline-block hover:text-cyan-200 dark:hover:text-teal-600 px-3 py-3 md:border-none text-gray-900 dark:text-white">Productos</a>
+    <a href="#services" class="block md:inline-block hover:text-cyan-200 dark:hover:text-teal-600 px-3 py-3 md:border-none text-gray-900 dark:text-white">Servicios</a>
+    <a href="#aboutus" class="block md:inline-block hover:text-cyan-200 dark:hover:text-teal-600 px-3 py-3 md:border-none text-gray-900 dark:text-white">Sobre Nosotros</a>
+  </div>
   
-    <div class="toggle w-full text-end md:flex md:w-auto px-2 py-2 md:rounded" [class.hidden]="isMenuHidden">
-      <div class="flex justify-end">
-        <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8 flex-1 justify-end justify-self-end">
-          <a class="text-gray-700 hover:text-lime-700 text-sm font-medium flex items-center" routerLink="/login">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd" />
-            </svg>
+  
+  <div class="toggle w-full text-end custom:flex custom:w-auto px-2 py-2 custom:rounded" [class.hidden]="isMenuHidden">
+    <div class="flex justify-end">
+      <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8 flex-1 justify-end justify-self-end ">
+        <a class="text-black hover:text-cyan-200 dark:hover:text-teal-600 text-sm font-bold flex items-center dark:text-white" routerLink="/login">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
             Login
-          </a>
-          <a class="text-white bg-gray-800 hover:bg-gray-900 inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm" routerLink="/signup">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
-            </svg>
+        </a>
+        <a class="text-white bg-gray-800 hover:bg-gray-900 dark:bg-[#64a0fd] dark:hover:bg-[#3b5e96] inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm dark:text-black" routerLink="/register">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+          </svg>
             Sign up
-          </a>
-        </div>
+        </a>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
 

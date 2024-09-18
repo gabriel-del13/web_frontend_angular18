@@ -27,15 +27,14 @@ export class ProductsCatalogComponent implements AfterViewInit {
     private ngZone: NgZone) {}
 
   ngOnInit() {
-    this.loadProducts( {category: '3'} );
+    // Filtrar por ID de Parent Category
+    this.loadProducts( {parent_category: '4'} );
   }
 
   loadProducts(filters?:any) {
     this.loading = true;
     this.productService.getProducts(filters).subscribe({
       next: (data) => {
-        console.log('Filtered products:', data); // Verifica los datos aquí
-
         this.products = data;
         this.loading = false;
       },

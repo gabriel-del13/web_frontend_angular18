@@ -15,7 +15,10 @@ export class ProductService {
     const params: {[key: string]: string} = {};
     if (filters) {
       if (filters.status) params['status'] = filters.status;
-      if (filters.category) params['parent_category'] = filters.category;
+      // Filtrado por Parent Category
+      if (filters.parent_category) params['parent_category'] = filters.parent_category;
+      // Filtrado por Name Category
+      if (filters.category) params['category'] = filters.category;
       if (filters.ordering) params['ordering'] = filters.ordering;
     }
     return this.apiService.get(`${this.endpoint}items/`, params);

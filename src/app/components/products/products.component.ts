@@ -41,6 +41,7 @@ export class ProductsComponent implements OnInit {
         this.products = data;
         this.loading = false;
       },
+      
       error: (err) => {
         console.error('Error loading products:', err);
         this.error = 'Failed to load products. Please try again later.';
@@ -48,4 +49,5 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
+  
 }

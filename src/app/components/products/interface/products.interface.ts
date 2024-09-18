@@ -2,7 +2,7 @@
 export interface CategoryInterface {
   id: number;
   name_category: string;
-  parent_category: number | null;
+  parent_category: string | null;
 }
 
 export interface ProductImageInterface {

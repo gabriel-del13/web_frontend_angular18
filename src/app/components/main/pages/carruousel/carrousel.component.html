@@ -1,0 +1,31 @@
+
+<div *ngIf="isLoading">
+    <p>Loading carousel...</p>
+  </div>
+  
+  <div *ngIf="!isLoading" class="relative overflow-hidden">
+    <div
+      class="flex transition-transform duration-500"
+      [ngStyle]="{'transform': 'translateX(-' + currentIndex * 100 + '%)'}"
+    >
+      <div *ngFor="let image of images" class="w-full flex-shrink-0">
+        <div [ngClass]="image.bgColor" class="w-full h-64 flex items-center justify-center">
+            <img [src]="image.src" alt="carousel image" class="w-full h-64 object-contain" />
+        </div>
+        </div>
+    </div>
+  
+    <button
+      class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 bg-opacity-50 p-2 text-white"
+      (click)="prev()"
+    >
+      ‹
+    </button>
+    <button
+      class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 bg-opacity-50 p-2 text-white"
+      (click)="next()"
+    >
+      ›
+    </button>
+  </div>
+  

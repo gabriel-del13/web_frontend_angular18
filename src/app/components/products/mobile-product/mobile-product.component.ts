@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { ProductInterface } from './../interface/products.interface';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-mobile-product',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './mobile-product.component.html',
-  styleUrl: './mobile-product.component.css'
 })
 export class MobileProductComponent {
   

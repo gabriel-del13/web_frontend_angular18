@@ -4,12 +4,11 @@ import { MainComponent } from './components/main/main.component';
 
 import { ServicesComponent } from './components/services/services.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
-import { HeaderComponent } from './components/main/pages/header/header.component'; 
-import { FooterComponent } from './components/main/pages/footer/footer.component';
-import { HeroComponent } from './components/main/pages/header/hero/hero.component';
-import { LocationComponent } from './components/main/pages/sections/location/location.component';
 import { LoginComponent } from './components/users/login/login.component';
 import { RegisterComponent } from './components/users/register/register.component';
+import { DetailProductsComponent } from './components/products/detail-products/detail-products.component';
+import { MainProductsComponent } from './components/main/main-products/main-products.component';
+
 
 export const routes: Routes = [
   { 
@@ -25,9 +24,10 @@ export const routes: Routes = [
   { 
     path: 'products', 
     children: [
-      { path: '', component: ProductsComponent },
+      { path: '', component: MainProductsComponent },
+      { path: 'items', component: ProductsComponent},
+      { path: 'items/:id', component: DetailProductsComponent },
       /*
-      { path: 'items/:id', component: ProductsItemComponent },
       { path: 'category/:id', component: ProductsCategoryComponent }
        */
     ]

@@ -1,0 +1,63 @@
+
+<style>
+.catalog-wrapper {
+  position: relative;
+  padding-bottom: 20px;
+}
+.catalog-container {
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+.catalog-container::-webkit-scrollbar {
+  display: none;
+}
+.scroll-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.scroll-thumb {
+  height: 100%;
+  background: #888;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: transform 0.1s ease-out;
+}
+</style>
+
+<div class="catalog-wrapper">
+    <div #catalogContainer class="catalog-container flex flex-nowrap space-x-4 pb-4">
+      @for (product of products; track product.name_product) {
+        <div class="flex-none w-64 sm:w-72">
+          <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+            <div class="relative pb-48 overflow-hidden">
+              <img class="absolute inset-0 w-full object-cover" [src]="product.images[0].image_url" [alt]="product.name_product">
+            </div>
+            <div class="p-4">
+              <h6 class="text-xs text-gray-600">{{ product.category.parent_category }}</h6>
+              <h2 class="text-lg font-semibold">{{ product.name_product }}</h2>
+            </div>
+            <div class="p-4 border-t border-b text-xs text-gray-700">
+              <div class="mt-3 flex items-center">
+                <span class="text-sm font-semibold"></span>&nbsp;<span class="font-bold text-xl">{{ product.price | currency }}</span>
+              </div>     
+            </div>
+          </a>
+        </div>
+      }
+    </div>
+    <div class="scroll-bar">
+      <div #scrollThumb class="scroll-thumb" (mousedown)="onThumbMouseDown($event)"></div>
+    </div>
+</div>

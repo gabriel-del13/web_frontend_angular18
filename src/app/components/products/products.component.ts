@@ -31,17 +31,16 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadProducts();
+    this.loadProducts({limit: 100, ordering: '-updated_at'});
   }
 
-  loadProducts() {
+  loadProducts(filters?: any) {
     this.loading = true;
-    this.productService.getProducts().subscribe({
+    this.productService.getProducts(filters).subscribe({
       next: (data) => {
-        this.products = data;
+        this.products = data.results;
         this.loading = false;
       },
-      
       error: (err) => {
         console.error('Error loading products:', err);
         this.error = 'Failed to load products. Please try again later.';
@@ -49,5 +48,19 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
-  
+
+  onCategoryChange(event: {parentCategory: number | null, category: number | null}) {
+    const filters: any = {
+      limit: 100,
+      ordering: '-updated_at'
+    };
+
+    if (event.category) {
+      filters.category = event.category;
+    } else if (event.parentCategory) {
+      filters.parent_category = event.parentCategory;
+    }
+
+    this.loadProducts(filters);
+  }
 }

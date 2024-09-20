@@ -17,9 +17,10 @@ export class ProductService {
       if (filters.status) params['status'] = filters.status;
       // Filtrado por Parent Category
       if (filters.parent_category) params['parent_category'] = filters.parent_category;
-      // Filtrado por Name Category
-      if (filters.category) params['category'] = filters.category;
-      if (filters.ordering) params['ordering'] = filters.ordering;
+      // Filtrado por Child Category
+      if (filters.child_category) params['child_category'] = filters.child_category;
+      if (filters.limit) params['limit'] = filters.limit.toString(); // Agregar el límite de productos
+      if (filters.ordering) params['ordering'] = filters.ordering;  // Ordenación
     }
     return this.apiService.get(`${this.endpoint}items/`, params);
   }
@@ -28,12 +29,4 @@ export class ProductService {
     return this.apiService.get(`${this.endpoint}items/${id}/`);
   }
 
-  getCategories(filters?: any): Observable<any> {
-    const params: {[key: string]: string} = {};
-    if (filters) {
-      if (filters.name_category) params['name_category'] = filters.name_category;
-      if (filters.parent_category) params['parent_category'] = filters.parent_category;
-    }
-    return this.apiService.get(`${this.endpoint}category/`, params);
-  }
 }

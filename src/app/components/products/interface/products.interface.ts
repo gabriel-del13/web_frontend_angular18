@@ -1,8 +1,9 @@
 
 export interface CategoryInterface {
-  id: number;
+  id_category: number;
   name_category: string;
-  parent_category: string | null;
+  parent_category: CategoryInterface | null;
+  subcategories: CategoryInterface[];
 }
 
 export interface ProductImageInterface {
@@ -13,12 +14,12 @@ export interface ProductImageInterface {
 
 
 export interface ProductInterface {
-  id: number;
+  id_product: number;
   name_product: string;
   description: string;
   price: number;
   available_quantity: number;
   status: string;
-  category: CategoryInterface;
+  child_category: CategoryInterface;
   images: ProductImageInterface[];
 }

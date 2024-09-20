@@ -44,17 +44,17 @@
 </style>
 
 
-<div class=" bg-indigo-200 dark:bg-[#151c25]">
+<div class=" bg-indigo-100 dark:bg-[#151c25]">
   <br>
   <div class="container mx-auto px-4 py-8 ">
     @if (products.length > 0) {
-      <h1 class="text-6xl font-bold text-center mb-8 text-gray-800 dark:text-white">
+      <h2 class="text-6xl font-bold text-center mb-8 text-gray-800 dark:text-white">
         {{ products[0].child_category.parent_category }}
-      </h1>
+      </h2>
     }
   </div>
 
-  <div class="catalog-wrapper dark:bg-gray-800" id="Switch">
+  <div class="catalog-wrapper dark:bg-gray-800" id="Mandos">
     <br>
       <div #catalogContainer class="catalog-container flex flex-nowrap space-x-4 pb-4">
         @for (product of products; track product.name_product) {

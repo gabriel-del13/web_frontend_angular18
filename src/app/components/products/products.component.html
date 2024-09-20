@@ -1,18 +1,12 @@
 <app-header></app-header>
 <div>
   <ng-container *ngIf="isMobile$ | async; else desktopView">
-    <app-mobile-product
-      [products]="products"
-      [loading]="loading"
-      [error]="error">
+    <app-mobile-product [products]="products" [loading]="loading" [error]="error">
     </app-mobile-product>
   </ng-container>
   <ng-template #desktopView>
-    <app-desktop-product
-      [products]="products"
-      [loading]="loading"
-      [error]="error">
+    <app-desktop-product [products]="products" [loading]="loading" [error]="error">
     </app-desktop-product>
   </ng-template>
-  </div>
+</div>
 <app-footer></app-footer>

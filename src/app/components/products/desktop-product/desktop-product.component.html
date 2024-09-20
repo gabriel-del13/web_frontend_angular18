@@ -1,31 +1,44 @@
-<div *ngIf="loading">Loading products...</div>
-<div *ngIf="error">{{ error }}</div>
-<table *ngIf="!loading && !error" class="w-full border-collapse border border-gray-300">
-  <thead>
-    <tr class="bg-gray-100">
-      <th class="p-2 border border-gray-300">Image</th>
-      <th class="p-2 border border-gray-300">Name</th>
-      <th class="p-2 border border-gray-300">Description</th>
-      <th class="p-2 border border-gray-300">Price</th>
-      <th class="p-2 border border-gray-300">Quantity</th>
-      <th class="p-2 border border-gray-300">Status</th>
-      <th class="p-2 border border-gray-300">Category</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products" class="hover:bg-gray-50">
-      <td class="p-2 border border-gray-300">
-        <img *ngIf="product.images && product.images.length > 0" 
-          [src]="product.images[0].image_url" 
-          [alt]="product.name_product" 
-          class="w-16 h-16 object-cover">
-      </td>
-      <td class="p-2 border border-gray-300">{{ product.name_product }}</td>
-      <td class="p-2 border border-gray-300">{{ product.description }}</td>
-      <td class="p-2 border border-gray-300">{{ product.price | currency }}</td>
-      <td class="p-2 border border-gray-300">{{ product.available_quantity }}</td>
-      <td class="p-2 border border-gray-300">{{ product.status }}</td>
-      <td class="p-2 border border-gray-300">{{ product.category.parent_category }}</td>
-    </tr>
-  </tbody>
-</table>
+
+
+<div class="col-span-4 row-span-4 col-start-2 row-start-2">
+  <div class="grid grid-cols-6 grid-rows-1 gap-4">
+    <div class="col-span-1 row-span-5 col-start-1 row-start-1">
+      <app-sidebar>(selectionChange)="onCategoryChange($event)"</app-sidebar>
+    </div>
+    <div class="col-span-5 col-start-2 row-start-1">2</div>
+
+    <div class="col-span-5 row-span-4 col-start-2 row-start-2 dark:bg-black">
+      <div *ngIf="loading">Loading products...</div>
+      <div *ngIf="error">{{ error }}</div>
+      <div *ngIf="!loading && !error" class="w-full">
+        <div id="Products"
+          class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+          <div *ngFor="let product of products"
+            class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+            <a href="#">
+              <img
+                [src]="product.images && product.images.length > 0 ? product.images[0].image_url : '/placeholder-image.jpg'"
+                [alt]="product.name_product" class="h-80 w-72 object-cover rounded-t-xl" />
+              <div class="px-4 py-3 w-72">
+                <span class="text-gray-400 mr-3 uppercase text-xs">{{ product.child_category.parent_category ||
+                  'Uncategorized' }}</span>
+                <p class="text-lg font-bold text-black truncate block capitalize">{{ product.name_product }}</p>
+                <div class="flex items-center">
+                  <p class="text-lg font-semibold text-black cursor-auto my-3">{{ product.price | currency }}</p>
+                  <button
+                    class="ml-auto text-gray-400 hover:text-red-500 transition-colors duration-200 focus:outline-none z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

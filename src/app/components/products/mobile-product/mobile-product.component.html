@@ -26,7 +26,7 @@
           <!-- Información del producto -->
           <div class="w-2/3 sm:w-full pl-3 sm:pl-0 sm:pt-3 flex flex-col justify-between">
             <!-- Categoría -->
-            <p class="text-xs text-gray-600">{{ product.category.parent_category || 'Uncategorized' }}</p>
+            <p class="text-xs text-gray-600">{{ product.child_category.parent_category || 'Uncategorized' }}</p>
             <!-- Título -->
             <h2 class="text-sm sm:text-lg font-semibold text-gray-900 line-clamp-2">{{ product.name_product }}</h2>
             <!-- Precio -->
@@ -34,7 +34,7 @@
             <!-- Cantidad disponible -->
             <p class="text-xs text-gray-600">Available: {{ product.available_quantity }}</p>
             <!-- Botón para ver detalles -->
-            <button [routerLink]="['/product', product.id]" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 sm:py-2 sm:px-4 rounded text-sm">
+            <button [routerLink]="['/product', product.id_product]" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 sm:py-2 sm:px-4 rounded text-sm">
               View Details
             </button>
           </div>

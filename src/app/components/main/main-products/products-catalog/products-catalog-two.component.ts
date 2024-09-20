@@ -1,23 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, AfterViewInit, ViewChild, ElementRef, HostListener, NgZone  } from '@angular/core';
-import { CategoryInterface, ProductInterface } from '../../../products/interface/products.interface';
+import { ProductInterface } from '../../../products/interface/products.interface';
 import { ProductService } from '../../../../services/apps/products.service';
-import { CategoriesService } from '../../../../services/apps/categories.service';
-
 
 @Component({
-  selector: 'app-products-catalog',
+  selector: 'app-products-catalog-two',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './products-catalog.component.html',
+  templateUrl: './products-catalog-two.component.html',
 })
-export class ProductsCatalogComponent implements AfterViewInit {
+export class ProductsCatalogTwoComponent implements AfterViewInit {
 
   @ViewChild('catalogContainer') catalogContainer!: ElementRef;
   @ViewChild('scrollThumb') scrollThumb!: ElementRef;
 
   products: ProductInterface[] = [];
-  categories: CategoryInterface[] = [];
   loading = false;
   error: string | null = null;
 
@@ -27,12 +24,11 @@ export class ProductsCatalogComponent implements AfterViewInit {
 
   constructor(
     private productService: ProductService,
-    private categoriesService: CategoriesService,
     private ngZone: NgZone) {}
 
   ngOnInit() {
     // Filtrar por ID de Parent Category, limitarlo a 3 y ordenar de mas nuevo a mas viejo
-    this.loadProducts( {parent_category: '1', limit: 7, ordering: '-updated_at'} );
+    this.loadProducts( {parent_category: '2', limit: 7, ordering: '-updated_at'} );
   }
 
   loadProducts(filters?:any) {

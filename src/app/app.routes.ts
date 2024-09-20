@@ -8,6 +8,7 @@ import { LoginComponent } from './components/users/login/login.component';
 import { RegisterComponent } from './components/users/register/register.component';
 import { DetailProductsComponent } from './components/products/detail-products/detail-products.component';
 import { MainProductsComponent } from './components/main/main-products/main-products.component';
+import { SidebarComponent } from './components/products/desktop-product/sidebar/sidebar.component';
 
 
 export const routes: Routes = [
@@ -32,7 +33,6 @@ export const routes: Routes = [
        */
     ]
   },
-  
   { path: 'services', component: ServicesComponent },
   { path: 'favorites', component: FavoritesComponent },
 

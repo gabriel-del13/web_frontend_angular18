@@ -17,9 +17,4 @@ export class DesktopProductComponent {
   @Input() loading = false;
   @Input() error: string | null = null;
   
-  @Output() categoryChange = new EventEmitter<{parentCategory: number | null, category: number | null}>();
-
-  onCategoryChange(event: {parentCategory: number | null, category: number | null}) {
-    this.categoryChange.emit(event);
-  }
 }

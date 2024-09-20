@@ -1,14 +1,48 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-<div id="wrapper" class="flex h-screen  sm:flex-col md:flex-row font-light w-full">
-  <div id="sidebar" class="bg-orange-darker md:w-64 bg-orange-800 overflow-y-scroll sm:w-screen">
-    <header class="flex justify-between items-center border-b border-orange-darkest pt-8 pb-8 pl-6 pr-6">
+<div id="wrapper" class="flex h-screen sm:flex-col md:flex-row font-light w-full">
+  <div id="sidebar" class="bg-orange-100 dark:bg-gray-800 md:w-64 overflow-y-auto sm:w-screen transition-colors duration-200">
+    <header class="flex justify-between items-center border-b border-orange-200 dark:border-gray-700 py-6 px-4">
       <div id="logo">
-        <a href="#" class="no-underline text-white md:text-2xl sm:text-4xl font-bold">
-          <img src="#" width="120" alt="">
+        <a href="#" class="no-underline text-orange-800 dark:text-white md:text-2xl sm:text-3xl font-semibold flex items-center">
+          <img src="#" width="40" alt="" class="mr-2">
           Categorías
         </a>
       </div>
     </header>
 
+    <div *ngFor="let parent of parentCategories" class="category mb-2">
+      <!-- Botón de Parent Category -->
+      <div class="w-full bg-orange-200 dark:bg-gray-700 text-orange-800 dark:text-white py-3 px-4 text-left font-medium hover:bg-orange-300 dark:hover:bg-gray-600 transition-colors duration-200 flex items-center">
+        <input type="checkbox" 
+               [checked]="parent.isSelected" 
+               (change)="toggleParentSelection(parent, $event)" 
+               (click)="$event.stopPropagation()"
+               class="mr-2 form-checkbox h-5 w-5 text-orange-500 dark:text-orange-400 rounded">
+        <span (click)="toggleChildCategories(parent.id)" class="flex-grow cursor-pointer">
+          {{ parent.name_parentcategory }}
+        </span>
+        <svg (click)="toggleChildCategories(parent.id)" 
+             class="ml-auto h-5 w-5 transform transition-transform duration-200 cursor-pointer" 
+             [ngClass]="{'rotate-180': parent.showChildren}" 
+             xmlns="http://www.w3.org/2000/svg" 
+             viewBox="0 0 20 20" 
+             fill="currentColor">
+          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </div>
+
+      <!-- Lista de Child Categories -->
+      <ul *ngIf="parent.showChildren" class="bg-orange-50 dark:bg-gray-900 border-l-2 border-orange-300 dark:border-orange-600 ml-4">
+        <li *ngFor="let child of parent.subcategories" class="py-2 px-4 hover:bg-orange-100 dark:hover:bg-gray-800 transition-colors duration-200">
+          <label class="flex items-center cursor-pointer">
+            <input type="checkbox" 
+                   [checked]="child.isSelected" 
+                   (change)="toggleChildSelection(parent, child, $event)" 
+                   (click)="$event.stopPropagation()"
+                   class="form-checkbox h-4 w-4 text-orange-500 dark:text-orange-400 rounded mr-2">
+            <span class="text-orange-700 dark:text-orange-100">{{ child.name_childcategory }}</span>
+          </label>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

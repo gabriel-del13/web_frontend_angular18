@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CategoryInterface } from '../../interface/products.interface';
-import { ProductService } from '../../../../services/apps/products.service';
+import { ParentCategoryInterface, ChildCategoryInterface } from '../../interface/products.interface';
+import { CategoriesService } from '../../../../services/apps/categories.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -10,6 +10,42 @@ import { RouterLink } from '@angular/router';
   imports: [CommonModule, RouterLink],
   templateUrl: './sidebar.component.html',
 })
-export class SidebarComponent{
+export class SidebarComponent implements OnInit{
+  parentCategories: ParentCategoryInterface[] = [];
 
+  constructor(private categoriesService: CategoriesService) {}
+
+  ngOnInit(): void {
+    this.loadParentCategories();
+  }
+
+  loadParentCategories(): void {
+    this.categoriesService.getParentCategories().subscribe(categories => {
+      this.parentCategories = categories.map((category: ParentCategoryInterface) => ({
+        ...category,
+        showChildren: false,
+        isSelected: false,
+        subcategories: category.subcategories.map(child => ({ ...child, isSelected: false }))
+      }));
+    });
+  }
+
+  toggleChildCategories(parentId: number): void {
+    const parent = this.parentCategories.find(cat => cat.id === parentId);
+    if (parent) {
+      parent.showChildren = !parent.showChildren;
+    }
+  }
+
+  toggleParentSelection(parent: ParentCategoryInterface, event: Event): void {
+    event.stopPropagation();
+    parent.isSelected = !parent.isSelected;
+    parent.subcategories.forEach(child => child.isSelected = parent.isSelected);
+  }
+
+  toggleChildSelection(parent: ParentCategoryInterface, child: ChildCategoryInterface, event: Event): void {
+    event.stopPropagation();
+    child.isSelected = !child.isSelected;
+    parent.isSelected = parent.subcategories.every(c => c.isSelected);
+  }
 }

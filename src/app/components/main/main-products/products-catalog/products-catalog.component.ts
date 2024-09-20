@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, AfterViewInit, ViewChild, ElementRef, HostListener, NgZone  } from '@angular/core';
-import { CategoryInterface, ProductInterface } from '../../../products/interface/products.interface';
+import { ChildCategoryInterface, ProductInterface } from '../../../products/interface/products.interface';
 import { ProductService } from '../../../../services/apps/products.service';
 import { CategoriesService } from '../../../../services/apps/categories.service';
 
@@ -17,7 +17,7 @@ export class ProductsCatalogComponent implements AfterViewInit {
   @ViewChild('scrollThumb') scrollThumb!: ElementRef;
 
   products: ProductInterface[] = [];
-  categories: CategoryInterface[] = [];
+  categories: ChildCategoryInterface[] = [];
   loading = false;
   error: string | null = null;
 

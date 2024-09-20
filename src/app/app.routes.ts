@@ -33,6 +33,7 @@ export const routes: Routes = [
        */
     ]
   },
+  { path: 'abc', component: SidebarComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'favorites', component: FavoritesComponent },
 

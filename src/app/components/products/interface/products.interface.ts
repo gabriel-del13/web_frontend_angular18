@@ -1,9 +1,20 @@
 
-export interface CategoryInterface {
-  id_category: number;
-  name_category: string;
-  parent_category: CategoryInterface | null;
-  subcategories: CategoryInterface[];
+export interface ParentCategoryInterface {
+  id: number;
+  name_parentcategory: string;
+  subcategories: ChildCategoryInterface[];
+  showChildren?: boolean;  // Propiedad opcional
+  isSelected: boolean;  // Nueva propiedad para manejar la selección
+
+}
+
+
+export interface ChildCategoryInterface {
+  id_childcategory: number;
+  name_childcategory: string;
+  parent_category: ParentCategoryInterface | null;
+  isSelected: boolean;  // Nueva propiedad para manejar la selección
+
 }
 
 export interface ProductImageInterface {
@@ -12,7 +23,6 @@ export interface ProductImageInterface {
 
 }
 
-
 export interface ProductInterface {
   id_product: number;
   name_product: string;
@@ -20,6 +30,6 @@ export interface ProductInterface {
   price: number;
   available_quantity: number;
   status: string;
-  child_category: CategoryInterface;
+  child_category: ChildCategoryInterface;
   images: ProductImageInterface[];
 }

@@ -12,7 +12,7 @@ export interface ParentCategoryInterface {
 export interface ChildCategoryInterface {
   id_childcategory: number;
   name_childcategory: string;
-  parent_category: ParentCategoryInterface | null;
+  parent_category: ParentCategoryInterface[] | null;
   isSelected: boolean;  // Nueva propiedad para manejar la selección
 
 }
@@ -31,5 +31,6 @@ export interface ProductInterface {
   available_quantity: number;
   status: string;
   child_category: ChildCategoryInterface;
+  parent_category: ParentCategoryInterface;
   images: ProductImageInterface[];
 }

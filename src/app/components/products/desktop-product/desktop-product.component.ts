@@ -17,10 +17,12 @@ export class DesktopProductComponent {
   @Input() products: ProductInterface[] = [];
   @Input() loading = false;
   @Input() error: string | null = null;
+
   @Output() categorySelected = new EventEmitter<{parentId?: number, childId?: number}>();
 
   constructor() {} 
 
+  //Se utiliza para emitar el evento hacia el componente padre (una parent category o child category fue seleccionada)
   onCategorySelected(event: {parentId?: number, childId?: number}) {
     this.categorySelected.emit(event);
   }

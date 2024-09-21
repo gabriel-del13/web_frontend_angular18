@@ -18,7 +18,7 @@
                 [src]="product.images && product.images.length > 0 ? product.images[0].image_url : '/placeholder-image.jpg'"
                 [alt]="product.name_product" class="h-80 w-72 object-cover rounded-t-xl" />
               <div class="px-4 py-3 w-72">
-                <span class="text-gray-400 mr-3 uppercase text-xs">{{ product.child_category.parent_category ||
+                <span class="text-gray-400 mr-3 uppercase text-xs">{{ product.parent_category.name_parentcategory ||
                   'Uncategorized' }}</span>
                 <p class="text-lg font-bold text-black truncate block capitalize">{{ product.name_product }}</p>
                 <div class="flex items-center">

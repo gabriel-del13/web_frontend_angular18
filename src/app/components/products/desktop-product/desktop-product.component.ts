@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from "./search-bar/search-bar.component";
 import { MainComponent } from "../../main/main.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
+import { ProductService } from '../../../services/apps/products.service';
 
 
 @Component({
@@ -16,5 +17,11 @@ export class DesktopProductComponent {
   @Input() products: ProductInterface[] = [];
   @Input() loading = false;
   @Input() error: string | null = null;
-  
+  @Output() categorySelected = new EventEmitter<{parentId?: number, childId?: number}>();
+
+  constructor() {} 
+
+  onCategorySelected(event: {parentId?: number, childId?: number}) {
+    this.categorySelected.emit(event);
+  }
 }

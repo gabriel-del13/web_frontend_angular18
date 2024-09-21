@@ -9,6 +9,7 @@ import { RegisterComponent } from './components/users/register/register.componen
 import { DetailProductsComponent } from './components/products/detail-products/detail-products.component';
 import { MainProductsComponent } from './components/main/main-products/main-products.component';
 import { SidebarComponent } from './components/products/desktop-product/sidebar/sidebar.component';
+import { DesktopProductComponent } from './components/products/desktop-product/desktop-product.component';
 
 
 export const routes: Routes = [
@@ -33,7 +34,7 @@ export const routes: Routes = [
        */
     ]
   },
-  { path: 'abc', component: SidebarComponent },
+  { path: 'abc', component: DesktopProductComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'favorites', component: FavoritesComponent },
 

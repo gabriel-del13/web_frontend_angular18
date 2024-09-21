@@ -5,7 +5,11 @@
     </app-mobile-product>
   </ng-container>
   <ng-template #desktopView>
-    <app-desktop-product [products]="products" [loading]="loading" [error]="error">
+    <app-desktop-product 
+    [products]="products"
+    [loading]="loading"
+    [error]="error"
+    (categorySelected)="onCategorySelected($event)">
     </app-desktop-product>
   </ng-template>
 </div>

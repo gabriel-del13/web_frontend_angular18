@@ -1,9 +1,7 @@
-
-
 <div class="col-span-4 row-span-4 col-start-2 row-start-2">
   <div class="grid grid-cols-6 grid-rows-1 gap-4">
     <div class="col-span-1 row-span-5 col-start-1 row-start-1">
-      <app-sidebar>(selectionChange)="onCategoryChange($event)"</app-sidebar>
+      <app-sidebar (categorySelected)="onCategorySelected($event)"></app-sidebar>
     </div>
     <div class="col-span-5 col-start-2 row-start-1">2</div>
 

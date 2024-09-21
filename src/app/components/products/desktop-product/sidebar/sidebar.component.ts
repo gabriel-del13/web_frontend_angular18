@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent implements OnInit{
+  @Output() categorySelected = new EventEmitter<{parentId?: number, childId?: number}>();
   parentCategories: ParentCategoryInterface[] = [];
 
   constructor(private categoriesService: CategoriesService) {}
@@ -41,11 +42,17 @@ export class SidebarComponent implements OnInit{
     event.stopPropagation();
     parent.isSelected = !parent.isSelected;
     parent.subcategories.forEach(child => child.isSelected = parent.isSelected);
+    this.emitCategorySelection(parent.id);
   }
 
   toggleChildSelection(parent: ParentCategoryInterface, child: ChildCategoryInterface, event: Event): void {
     event.stopPropagation();
     child.isSelected = !child.isSelected;
     parent.isSelected = parent.subcategories.every(c => c.isSelected);
+    this.emitCategorySelection(parent.id, child.id_childcategory);
+  }
+
+  private emitCategorySelection(parentId?: number, childId?: number): void {
+    this.categorySelected.emit({ parentId, childId });
   }
 }

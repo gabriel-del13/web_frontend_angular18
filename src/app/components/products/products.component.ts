@@ -49,16 +49,16 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  onCategoryChange(event: {parentCategory: number | null, category: number | null}) {
+  onCategorySelected(event: {parentId?: number, childId?: number}) {
     const filters: any = {
       limit: 100,
       ordering: '-updated_at'
     };
 
-    if (event.category) {
-      filters.category = event.category;
-    } else if (event.parentCategory) {
-      filters.parent_category = event.parentCategory;
+    if (event.childId) {
+      filters.child_category = event.childId;
+    } else if (event.parentId) {
+      filters.parent_category = event.parentId;
     }
 
     this.loadProducts(filters);

@@ -40,8 +40,6 @@ export class SidebarComponent implements OnInit{
   removeCategorySelection(parentId: number): void {
     this.categorySelected.emit({ parentId: undefined, childId: undefined });
   }
-  
-
 
   // Función para manejar la selección de una Parent Category
   toggleParentSelection(parent: ParentCategoryInterface, event: Event): void {
@@ -77,12 +75,17 @@ export class SidebarComponent implements OnInit{
       parent.isSelected = parent.subcategories.every(c => c.isSelected);
   
       // Emitir evento de selección para la subcategoría
-      this.emitCategorySelection(parent.id, child.id);
+      if (child.isSelected) {
+        this.emitCategorySelection(parent.id, child.id);  // Seleccionar subcategoría
+      } else {
+        this.removeCategorySelection(parent.id);  // Deseleccionar subcategoría
+      }
     } else {
       // Alternar visibilidad (mostrar/ocultar) de las subcategorías
       parent.showChildren = !parent.showChildren;
     }
   }
+  
 
   // Función para emitir el evento de selección de categoría
   private emitCategorySelection(parentId?: number, childId?: number): void {

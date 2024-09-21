@@ -77,7 +77,7 @@ export class SidebarComponent implements OnInit{
       parent.isSelected = parent.subcategories.every(c => c.isSelected);
   
       // Emitir evento de selección para la subcategoría
-      this.emitCategorySelection(parent.id, child.id_childcategory);
+      this.emitCategorySelection(parent.id, child.id);
     } else {
       // Alternar visibilidad (mostrar/ocultar) de las subcategorías
       parent.showChildren = !parent.showChildren;

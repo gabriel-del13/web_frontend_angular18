@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from "./search-bar/search-bar.component";
 import { MainComponent } from "../../main/main.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
-import { ProductService } from '../../../services/apps/products.service';
 
 
 @Component({

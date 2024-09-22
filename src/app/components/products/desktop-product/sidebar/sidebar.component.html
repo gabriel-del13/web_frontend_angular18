@@ -1,8 +1,9 @@
-<div id="wrapper" class="flex h-screen sm:flex-col md:flex-row font-light w-full">
-  <div id="sidebar" class="bg-orange-100 dark:bg-gray-800 md:w-64 overflow-y-auto sm:w-screen transition-colors duration-200">
-    <header class="flex justify-between items-center border-b border-orange-200 dark:border-gray-700 py-6 px-4">
-      <div id="logo">
-        <a href="#" class="no-underline text-orange-800 dark:text-white md:text-2xl sm:text-3xl font-semibold flex items-center">
+<div id="wrapper" class="flex h-full sm:flex-col md:flex-row font-light w-full">
+  <div id="sidebar" class="bg-gray-100 dark:bg-[#151c25] overflow-y-auto sm:w-full md:w-screen lg:w-full transition-colors duration-200">
+    <br> <br> <br>
+    <header class="border-b border-orange-200 dark:border-gray-700 py-6 px-0">
+      <div id="logo" class="w-full text-left">
+        <a href="#" class="no-underline dark:text-white md:text-2xl sm:text-3xl font-bold flex items-center">
           <img src="#" width="40" alt="" class="mr-2">
           Categorías
         </a>
@@ -11,7 +12,7 @@
 
     <div *ngFor="let parent of parentCategories" class="category mb-2">
       <!-- Botón de Parent Category -->
-      <div class="w-full bg-orange-200 dark:bg-gray-700 text-orange-800 dark:text-white py-3 px-4 text-left font-medium hover:bg-orange-300 dark:hover:bg-gray-600 transition-colors duration-200 flex items-center">
+      <div class="w-full bg-[#bcd5fd] dark:bg-gray-700  dark:text-white py-3 px-4 text-left font-medium hover:bg-[#385a8f] dark:hover:bg-gray-600 transition-colors duration-200 flex items-center">
         <input type="checkbox" 
                [checked]="parent.isSelected" 
                (change)="toggleParentSelection(parent, $event)" 

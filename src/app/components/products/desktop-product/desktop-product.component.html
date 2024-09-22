@@ -1,30 +1,30 @@
 <div class="col-span-4 row-span-4 col-start-2 row-start-2">
-  <div class="grid grid-cols-6 grid-rows-1 gap-4">
+  <div class="grid grid-cols-6 grid-rows-1 gap-0">
     <div class="col-span-1 row-span-5 col-start-1 row-start-1">
       <app-sidebar (categorySelected)="onCategorySelected($event)"></app-sidebar>
     </div>
-    <div class="col-span-5 col-start-2 row-start-1">2</div>
+    <div class="col-span-5 col-start-2 row-start-1"> 2 </div>
 
-    <div class="col-span-5 row-span-4 col-start-2 row-start-2 dark:bg-black">
+    <div class="col-span-5 row-span-4 col-start-2 row-start-2 bg-gray-100 dark:bg-[#151c25] overflow-hidden">
       <div *ngIf="loading">Loading products...</div>
       <div *ngIf="error">{{ error }}</div>
       <div *ngIf="!loading && !error" class="w-full">
         <div id="Products"
-          class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+        class="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 justify-items-center justify-center gap-6 mt-10 mb-5">
           <div *ngFor="let product of products"
-            class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+          class="w-full max-w-[280px] bg-white dark:bg-gray-800 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
             <a href="#">
               <img
                 [src]="product.images && product.images.length > 0 ? product.images[0].image_url : '/placeholder-image.jpg'"
                 [alt]="product.name_product" class="h-80 w-72 object-cover rounded-t-xl" />
-              <div class="px-4 py-3 w-72">
+              <div class="px-4 py-3 w-full">
                 <span class="text-gray-400 mr-3 uppercase text-xs">{{ product.parent_category.name_parentcategory ||
                   'Uncategorized' }}</span>
-                <p class="text-lg font-bold text-black truncate block capitalize">{{ product.name_product }}</p>
-                <div class="flex items-center">
-                  <p class="text-lg font-semibold text-black cursor-auto my-3">{{ product.price | currency }}</p>
+                <p class="text-lg font-bold text-black dark:text-white block capitalize">{{ product.name_product }}</p>
+                <div class="flex items-center justify-between">
+                  <p class="text-lg font-semibold text-black dark:text-white cursor-auto my-3">{{ product.price | currency }}</p>
                   <button
-                    class="ml-auto text-gray-400 hover:text-red-500 transition-colors duration-200 focus:outline-none z-10">
+                    class=" text-gray-400 hover:text-red-500 transition-colors duration-200 focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                       stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

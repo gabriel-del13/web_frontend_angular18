@@ -20,7 +20,7 @@ export class ScreenSizeService {
   }
 
   private checkScreenSize(): void {
-    const isMobile = window.innerWidth < 560;
+    const isMobile = window.innerWidth < 900;
     this.isMobileSubject.next(isMobile);
   }
 }

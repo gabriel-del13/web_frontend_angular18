@@ -4,16 +4,17 @@ import { ProductService } from '../../services/apps/products.service';
 import { ProductInterface } from './interface/products.interface';
 import { HeaderComponent } from "../main/pages/header/header.component";
 import { FooterComponent } from "../main/pages/footer/footer.component";
-import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject, Observable } from 'rxjs';
 import { ScreenSizeService } from '../../services/apps/screen-size.service';
 import { MobileProductComponent } from "./mobile-product/mobile-product.component";
 import { DesktopProductComponent } from "./desktop-product/desktop-product.component";
+import { SearchBarComponent } from "./desktop-product/search-bar/search-bar.component";
 
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, FooterComponent, MobileProductComponent, DesktopProductComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent, MobileProductComponent, DesktopProductComponent, SearchBarComponent],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
@@ -21,6 +22,7 @@ export class ProductsComponent implements OnInit {
   products: ProductInterface[] = [];
   loading = false;
   error: string | null = null;
+  searchTerms = new Subject<string>();
   isMobile$: Observable<boolean>;
 
   // Pagination variables
@@ -28,6 +30,14 @@ export class ProductsComponent implements OnInit {
   itemsPerPage = 15; // Adjust as needed
   totalItems = 0;
   totalPages = 0;
+  
+  // Filter state
+  currentFilters: any = {
+      limit: this.itemsPerPage,
+      offset: 0,
+      ordering: '-updated_at'
+  };
+  
 
   constructor(
     private productService: ProductService,
@@ -37,18 +47,33 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadProducts({limit: this.itemsPerPage, offset:0, ordering: '-updated_at'});
+    this.setupSearch();
+    this.loadProducts();
   }
 
-  loadProducts(filters?: any) {
+  setupSearch() {
+    this.searchTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(term => {
+      this.currentFilters.search = term;
+      this.currentFilters.offset = 0;
+      this.loadProducts();
+    });
+  }
+
+  onSearch(term: string) {
+    this.searchTerms.next(term);
+  }
+
+  loadProducts() {
     this.loading = true;
-    this.productService.getProducts(filters).subscribe({
+    this.productService.getProducts(this.currentFilters).subscribe({
       next: (data) => {
         this.products = data.results;
         this.totalItems = data.count;
         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
         this.loading = false;
-
       },
       error: (err) => {
         console.error('Error loading products:', err);
@@ -59,25 +84,39 @@ export class ProductsComponent implements OnInit {
   }
 
   onCategorySelected(event: {parentIds: number[], childIds: number[]}) {
-    const filters: any = {
-      limit: this.itemsPerPage,
-      offset: 0,
-      ordering: '-updated_at'
-    };
-
-    if (event.childIds) {
-      filters.child_category = event.childIds;
-    } else if (event.parentIds) {
-      filters.parent_category = event.parentIds;
+    if (event.childIds && event.childIds.length > 0) {
+      this.currentFilters.child_category = event.childIds;
+      delete this.currentFilters.parent_category;
+    } else if (event.parentIds && event.parentIds.length > 0) {
+      this.currentFilters.parent_category = event.parentIds;
+      delete this.currentFilters.child_category;
+    } else {
+      delete this.currentFilters.child_category;
+      delete this.currentFilters.parent_category;
     }
+    
     this.currentPage = 1;
-    this.loadProducts(filters);
+    this.currentFilters.offset = 0;
+    this.loadProducts();
   }
 
   onPageChange(page: number) {
     this.currentPage = page;
-    const offset = (page - 1) * this.itemsPerPage;
-    this.loadProducts({ limit: this.itemsPerPage, offset, ordering: '-updated_at' });
+    this.currentFilters.offset = (page - 1) * this.itemsPerPage;
+    this.loadProducts();
   }
+
+  resetFilters() {
+    this.currentFilters = {
+      limit: this.itemsPerPage,
+      offset: 0,
+      ordering: '-updated_at'
+    };
+    this.currentPage = 1;
+    this.loadProducts();
+  }
+
+
+
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ParentCategoryInterface, ChildCategoryInterface } from '../../interface/products.interface';
 import { CategoriesService } from '../../../../services/apps/categories.service';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,8 @@ import { RouterLink } from '@angular/router';
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent implements OnInit {
+  @Input() currentFilters: any;
+
   @Output() categorySelected = new EventEmitter<{parentIds: number[], childIds: number[]}>();
 
   parentCategories: ParentCategoryInterface[] = [];

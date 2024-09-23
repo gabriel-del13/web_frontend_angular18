@@ -14,6 +14,7 @@ export class ProductService {
   getProducts(filters?: any): Observable<any> {
     const params: {[key: string]: string} = {};
     if (filters) {
+      if (filters.search) params['search'] = filters.search;
       if (filters.status) params['status'] = filters.status;
       // Filtrado por Parent Category
       if (filters.parent_category) params['parent_category'] = filters.parent_category;

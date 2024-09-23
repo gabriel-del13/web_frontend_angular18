@@ -1,10 +1,23 @@
 <app-header></app-header>
 <div>
   <ng-container *ngIf="isMobile$ | async; else desktopView">
-    <app-mobile-product [products]="products" [loading]="loading" [error]="error">
+    <app-mobile-product 
+    [products]="products" 
+    [loading]="loading" 
+    [error]="error"
+    (categorySelected)="onCategorySelected($event)"
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)"
+    (search)="onSearch($event)"
+    >
     </app-mobile-product>
   </ng-container>
   <ng-template #desktopView>
+    <div class=" bg-gray-100 dark:bg-[#151c25]">
+      <div class="flex justify-center">      
+        <app-search-bar (search)="onSearch($event)"></app-search-bar>
+      </div>
     <app-desktop-product 
     [products]="products"
     [loading]="loading"
@@ -15,8 +28,10 @@
     [totalItems]="totalItems"
     [totalPages]="totalPages"
     (pageChange)="onPageChange($event)"
+  
     >
     </app-desktop-product>
+  </div>
   </ng-template>
 </div>
 <app-footer></app-footer>

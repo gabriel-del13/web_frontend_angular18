@@ -1,16 +1,15 @@
-import { Component, Input, Output, EventEmitter, input } from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { ProductInterface } from './../interface/products.interface';
 import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from "./search-bar/search-bar.component";
 import { MainComponent } from "../../main/main.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
-import { ProductService } from '../../../services/apps/products.service';
 
 
 @Component({
   selector: 'app-desktop-product',
   standalone: true,
-  imports: [CommonModule, MainComponent, SidebarComponent],
+  imports: [CommonModule, MainComponent, SidebarComponent, SearchBarComponent],
   templateUrl: './desktop-product.component.html',})
 export class DesktopProductComponent {
   

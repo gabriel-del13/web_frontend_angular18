@@ -1,40 +1,115 @@
-<div class="p-2 sm:p-4">
+<div class="dark:bg-gray-600">
+  <br>
+  <div class="relative w-full flex items-center space-x-4">
+    <!-- Dropdown Container -->
+    <div class="relative">
+      <!-- Dropdown Button -->
+      <button
+        class="bg-gray-200 dark:bg-[#1f2937] text-gray-700 dark:text-white py-2 px-4 flex justify-center items-center focus:outline-none rounded-2xl"
+        (click)="toggleDropdown()">
+        Filtrar
+        <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <!-- Dropdown Menu -->
+      <div *ngIf="DropdownisOpen" class="absolute left-0 w-72 mt-2 rounded-md shadow-lg bg-white z-10">
+        <div class="py-1 max-h-60 overflow-y-auto">
+          <!-- Categories and Subcategories -->
+          <div *ngFor="let parent of parentCategories" class="category mb-2">
+            <!-- Parent Category Button -->
+            <div
+              class="w-full  dark:bg-blue-950 dark:text-white py-3 px-4 text-left font-medium hover:bg-[#385a8f] dark:hover:bg-blue-600 transition-colors duration-200 flex items-center">
+              <input type="checkbox" [checked]="parent.isSelected" (change)="toggleParentSelection(parent, $event)"
+                (click)="$event.stopPropagation()"
+                class="mr-2 form-checkbox h-5 w-5 text-orange-500 dark:text-orange-400 rounded">
+              <span (click)="toggleChildrenVisibility(parent)" class="flex-grow cursor-pointer">
+                {{ parent.name_parentcategory }}
+              </span>
+              <svg (click)="toggleChildrenVisibility(parent)"
+                class="ml-auto h-5 w-5 transform transition-transform duration-200 cursor-pointer"
+                [ngClass]="{'rotate-180': parent.showChildren}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd" />
+              </svg>
+            </div>
+
+            <!-- Child Categories List -->
+            <ul *ngIf="parent.showChildren"
+              class="bg-orange-50 dark:bg-gray-700 border-l-2 border-orange-300 dark:border-orange-600 ml-4">
+              <li *ngFor="let child of parent.subcategories"
+                class="py-2 px-4 hover:bg-orange-100 dark:hover:bg-gray-800 transition-colors duration-200">
+                <label class="flex items-center cursor-pointer">
+                  <input type="checkbox" [checked]="child.isSelected"
+                    (change)="toggleChildSelection(parent, child, $event)" (click)="$event.stopPropagation()"
+                    class="form-checkbox h-4 w-4 text-orange-500 dark:text-orange-400 rounded mr-2">
+                  <span class="text-orange-700 dark:text-orange-100">{{ child.name_childcategory }}</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Bar and Button -->
+    <div class="flex-grow flex items-center">
+      <input type="text"
+        class="flex-grow bg-gray-100 text-gray-700 py-2 px-4 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Buscar producto..." [(ngModel)]="searchTerm" />
+      <button (click) = "onSearch()" type="submit"
+              class="bg-blue-500 text-white py-2 px-4 rounded-r-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        Buscar
+      </button>
+    </div>
+  </div>
+
+
+  <div class="p-2 sm:p-4 ">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
-      <div *ngFor="let product of products" 
-           class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col relative"
-           [ngClass]="{
+      <div *ngFor="let product of products" class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col relative"
+        [ngClass]="{
              'border-l-4' :true,
              'border-green-500': product.status === 'DISPONIBLE',
              'border-red-500': product.status === 'AGOTADO',
              'border-yellow-500': product.status === 'PRÓXIMAMENTE'
            }">
         <!-- Botón de favoritos -->
-        <button class="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition-colors duration-200 focus:outline-none z-10">
+        <button
+          class="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition-colors duration-200 focus:outline-none z-10">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
           </svg>
         </button>
-        
+
         <!-- Contenido de la card -->
-        <div class="p-3 flex flex-row sm:flex-col">
+        <div class="p-3 flex flex-row sm:flex-col dark:bg-[#1f2937] ">
           <!-- Imagen -->
           <div class="w-1/3 sm:w-full h-full sm:h-48 flex-shrink-0">
-            <img [src]="product.images && product.images.length > 0 ? product.images[0].image_url : '/placeholder-image.jpg'"
-                 [alt]="product.name_product"
-                 class="w-full h-full object-cover">
+            <img
+              [src]="product.images && product.images.length > 0 ? product.images[0].image_url : '/placeholder-image.jpg'"
+              [alt]="product.name_product" class="w-full h-full object-cover">
           </div>
           <!-- Información del producto -->
           <div class="w-2/3 sm:w-full pl-3 sm:pl-0 sm:pt-3 flex flex-col justify-between">
             <!-- Categoría -->
-            <p class="text-xs text-gray-600">{{ product.child_category.parent_category || 'Uncategorized' }}</p>
+            <p class="text-xs text-gray-600 dark:text-white">{{ product.child_category.parent_category ||
+              'Uncategorized' }}</p>
             <!-- Título -->
-            <h2 class="text-sm sm:text-lg font-semibold text-gray-900 line-clamp-2">{{ product.name_product }}</h2>
+            <h2 class="text-sm sm:text-lg font-semibold text-gray-900 line-clamp-2 dark:text-white">{{
+              product.name_product }}</h2>
             <!-- Precio -->
-            <p class="text-lg sm:text-xl font-bold text-gray-900">{{ product.price | currency }}</p>
+            <p class="text-lg sm:text-xl font-bold text-gray-900 dark:text-red-500">{{ product.price | currency }}</p>
             <!-- Cantidad disponible -->
-            <p class="text-xs text-gray-600">Available: {{ product.available_quantity }}</p>
+            <p class="text-xs text-gray-600 dark:text-white">Available: {{ product.available_quantity }}</p>
             <!-- Botón para ver detalles -->
-            <button [routerLink]="['/product', product.id]" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 sm:py-2 sm:px-4 rounded text-sm">
+            <button [routerLink]="['/product', product.id]"
+              class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 sm:py-2 sm:px-4 rounded text-sm">
               View Details
             </button>
           </div>
@@ -42,3 +117,63 @@
       </div>
     </div>
   </div>
+
+  <!-- Next an Previus -->
+  <div
+    class=" flex flex-1 w-full px-4 py-3 mt-12 bg-white dark:bg-[#4b5563] border-t border-gray-200 shadow-md sm:px-6 ">
+    <div class="flex justify-between flex-1 sm:hidden">
+      <button type="button" (click)="previousPage()" [disabled]="currentPage === 1"
+        class="relative inline-flex items-center px-2 py-2 text-sm 5xl:text-xl font-medium text-gray-700 bg-white  border border-gray-300 rounded-md sm:rounded-none hover:bg-gray-50"
+        data-id="pagination-prev">
+        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" class="w-5 h-5"
+          aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+            clip-rule="evenodd">
+          </path>
+        </svg>
+        Previous
+      </button>
+      <button type="button" (click)="nextPage()" [disabled]="currentPage === totalPages"
+        class="relative inline-flex items-center px-2 py-2 text-sm 5xl:text-xl   font-medium text-gray-700 bg-white border border-gray-300 rounded-md sm:rounded-none hover:bg-gray-50 "
+        data-id="pagination-next">
+        Next
+        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" class="w-5 h-5"
+          aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+            clip-rule="evenodd">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+      <div class="relative z-0 flex justify-between w-full -space-x-px rounded-md" aria-label="Pagination">
+        <button type="button" (click)="previousPage()" [disabled]="currentPage === 1"
+          class="relative inline-flex items-center px-2 py-2 text-sm 5xl:text-xl font-medium text-gray-700 bg-white border border-gray-300 rounded-md sm:rounded-none hover:bg-gray-50 sm:rounded-l-md"
+          data-id="pagination-prev">
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" class="w-5 h-5"
+            aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+              clip-rule="evenodd">
+            </path>
+          </svg>
+          Previous Page
+        </button>
+        <button type="button" (click)="nextPage()" [disabled]="currentPage === totalPages"
+          class="relative inline-flex items-center px-2 py-2 text-sm 5xl:text-xl   font-medium text-gray-700 bg-white border border-gray-300 rounded-md sm:rounded-none hover:bg-gray-50 sm:rounded-r-md"
+          data-id="pagination-next">
+          Next Page
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" class="w-5 h-5"
+            aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd">
+            </path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

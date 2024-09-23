@@ -10,22 +10,14 @@
 
     <!-- Search -->
     <h2 class="text-grey-700 font-medium text-3xl md:text-3xl leading-tight mb-2 flex justify-center dark:text-white">¿Buscas Algo En Especifico?</h2>
-    <div class="  w-screen flex justify-center items-center">
-        <form action="/search" class="max-w-[480px] w-full px-4">
-            <div class="relative">
-                <input type="text" name="q" class="w-full border-4 h-12 shadow-xl dark:shadow-gray-950 p-6 rounded-full dark:text-gray-800 dark:border-gray-900 dark:bg-gray-200" placeholder="Juegos...">
-                <button type="submit">
-                    <svg class="text-teal-400 h-5 w-5 absolute top-3.5 right-3 fill-current dark:text-teal-300"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                        x="0px" y="0px" viewBox="0 0 56.966 56.966"
-                        style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve">
-                        <path
-                            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-        </form>
+    <br>
+    <div class=" w-screen flex justify-center items-center">
+        <button routerLink="/products/items" class=" bg-gradient-to-r from-teal-400 to-blue-500 hover:from-teal-500 hover:to-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-200 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-50 flex items-center justify-center">
+            <span class="mr-2">Buscar juegos</span>
+            <svg class="h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M23.809 21.646l-6.205-6.205c1.167-1.605 1.857-3.579 1.857-5.711 0-5.365-4.365-9.73-9.731-9.73-5.365 0-9.73 4.365-9.73 9.73 0 5.366 4.365 9.73 9.73 9.73 2.034 0 3.923-.627 5.487-1.698l6.238 6.238c.401.401.935.621 1.502.621s1.101-.221 1.502-.621c.83-.83.83-2.17 0-3zm-14.079-3.853c-4.385 0-7.946-3.561-7.946-7.946s3.561-7.946 7.946-7.946 7.946 3.561 7.946 7.946-3.561 7.946-7.946 7.946z"/>
+            </svg>
+        </button>
     </div>
 
     <app-logo-grid> </app-logo-grid>

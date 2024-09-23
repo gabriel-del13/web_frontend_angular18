@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from "./pages/header/header.component";
 import { FooterComponent } from "./pages/footer/footer.component";
@@ -11,6 +11,9 @@ import { LocationComponent } from "./pages/sections/location/location.component"
 import { LogoGridComponent } from './pages/logo-grid/logo-grid.component';
 import { GalleryComponent } from "./pages/sections/gallery/gallery.component";
 import { ScrollButtonComponent } from "./pages/footer/scroll-button/scroll-button.component";
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { Router } from 'express';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -20,13 +23,11 @@ import { ScrollButtonComponent } from "./pages/footer/scroll-button/scroll-butto
     RouterModule, HeaderComponent, FooterComponent, HeroComponent,
     ServicesComponent, SectionproductsComponent, SectionservicesComponent,
     AboutComponent, LocationComponent, LogoGridComponent,
-    GalleryComponent,
-    ScrollButtonComponent
+    GalleryComponent, ScrollButtonComponent, FormsModule
 ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
 export class MainComponent {
 
-  
 }

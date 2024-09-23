@@ -10,9 +10,9 @@
       <div *ngIf="error">{{ error }}</div>
       <div *ngIf="!loading && !error" class="w-full">
         <div id="Products"
-        class="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 justify-items-center justify-center gap-6 mt-10 mb-5">
+          class="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 justify-center gap-6 mt-10 mb-5">
           <div *ngFor="let product of products"
-          class="w-full max-w-[280px] bg-white dark:bg-gray-800 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+            class="w-full max-w-[280px] bg-white dark:bg-gray-800 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
             <a href="#">
               <img
                 [src]="product.images && product.images.length > 0 ? product.images[0].image_url : '/placeholder-image.jpg'"
@@ -22,9 +22,9 @@
                   'Uncategorized' }}</span>
                 <p class="text-lg font-bold text-black dark:text-white block capitalize">{{ product.name_product }}</p>
                 <div class="flex items-center justify-between">
-                  <p class="text-lg font-semibold text-black dark:text-white cursor-auto my-3">{{ product.price | currency }}</p>
-                  <button
-                    class=" text-gray-400 hover:text-red-500 transition-colors duration-200 focus:outline-none">
+                  <p class="text-lg font-semibold text-black dark:text-white cursor-auto my-3">{{ product.price |
+                    currency }}</p>
+                  <button class=" text-gray-400 hover:text-red-500 transition-colors duration-200 focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                       stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -36,7 +36,36 @@
             </a>
           </div>
         </div>
+        <!-- Pagination -->
+        <div *ngIf="totalPages > 1" class="flex justify-center items-center space-x-2 mt-4">
+          <button *ngIf="currentPage > 1" (click)="onPageChange(1)" class="px-3 py-1 rounded bg-gray-200 text-gray-700">
+            &lt;&lt;
+          </button>
+          <button *ngIf="currentPage > 1" (click)="onPageChange(currentPage - 1)"
+            class="px-3 py-1 rounded bg-gray-200 text-gray-700">
+            &lt;
+          </button>
+          <ng-container *ngFor="let page of getVisiblePages()">
+            <ng-container *ngIf="page !== '...'; else ellipsis">
+              <button (click)="onPageChange(page)" [class.bg-blue-500]="page === currentPage"
+                [class.text-white]="page === currentPage" class="px-3 py-1 rounded"
+                [class.bg-gray-200]="page !== currentPage" [class.text-gray-700]="page !== currentPage">
+                {{ page }}
+              </button>
+            </ng-container>
+            <ng-template #ellipsis>
+              <span class="px-2">...</span>
+            </ng-template>
+          </ng-container>
+          <button *ngIf="currentPage < totalPages" (click)="onPageChange(currentPage + 1)"
+            class="px-3 py-1 rounded bg-gray-200 text-gray-700">
+            &gt;
+          </button>
+          <button *ngIf="currentPage < totalPages" (click)="onPageChange(totalPages)"
+            class="px-3 py-1 rounded bg-gray-200 text-gray-700">
+            &gt;&gt;
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>

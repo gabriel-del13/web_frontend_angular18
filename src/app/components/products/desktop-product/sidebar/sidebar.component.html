@@ -18,10 +18,10 @@
                (change)="toggleParentSelection(parent, $event)" 
                (click)="$event.stopPropagation()"
                class="mr-2 form-checkbox h-5 w-5 text-orange-500 dark:text-orange-400 rounded">
-        <span (click)="toggleChildSelection(parent)" class="flex-grow cursor-pointer">
+        <span (click)="toggleChildrenVisibility(parent)" class="flex-grow cursor-pointer">
           {{ parent.name_parentcategory }}
         </span>
-        <svg (click)="toggleChildSelection(parent)" 
+        <svg (click)="toggleChildrenVisibility(parent)" 
              class="ml-auto h-5 w-5 transform transition-transform duration-200 cursor-pointer" 
              [ngClass]="{'rotate-180': parent.showChildren}" 
              xmlns="http://www.w3.org/2000/svg" 

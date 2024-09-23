@@ -9,7 +9,13 @@
     [products]="products"
     [loading]="loading"
     [error]="error"
-    (categorySelected)="onCategorySelected($event)">
+    (categorySelected)="onCategorySelected($event)"
+    [currentPage]="currentPage"
+    [itemsPerPage]="itemsPerPage"
+    [totalItems]="totalItems"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)"
+    >
     </app-desktop-product>
   </ng-template>
 </div>

@@ -20,6 +20,7 @@ export class ProductService {
       // Filtrado por Child Category
       if (filters.child_category) params['child_category'] = filters.child_category;
       if (filters.limit) params['limit'] = filters.limit.toString(); // Agregar el límite de productos
+      if (filters.offset) params['offset'] = filters.offset.toString();
       if (filters.ordering) params['ordering'] = filters.ordering;  // Ordenación
     }
     return this.apiService.get(`${this.endpoint}items/`, params);

@@ -23,6 +23,12 @@ export class ProductsComponent implements OnInit {
   error: string | null = null;
   isMobile$: Observable<boolean>;
 
+  // Pagination variables
+  currentPage = 1;
+  itemsPerPage = 15; // Adjust as needed
+  totalItems = 0;
+  totalPages = 0;
+
   constructor(
     private productService: ProductService,
     private screenSizeService: ScreenSizeService
@@ -31,7 +37,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadProducts({limit: 100, ordering: '-updated_at'});
+    this.loadProducts({limit: this.itemsPerPage, offset:0, ordering: '-updated_at'});
   }
 
   loadProducts(filters?: any) {
@@ -39,7 +45,10 @@ export class ProductsComponent implements OnInit {
     this.productService.getProducts(filters).subscribe({
       next: (data) => {
         this.products = data.results;
+        this.totalItems = data.count;
+        this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
         this.loading = false;
+
       },
       error: (err) => {
         console.error('Error loading products:', err);
@@ -49,18 +58,26 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  onCategorySelected(event: {parentId?: number, childId?: number}) {
+  onCategorySelected(event: {parentIds: number[], childIds: number[]}) {
     const filters: any = {
-      limit: 100,
+      limit: this.itemsPerPage,
+      offset: 0,
       ordering: '-updated_at'
     };
 
-    if (event.childId) {
-      filters.child_category = event.childId;
-    } else if (event.parentId) {
-      filters.parent_category = event.parentId;
+    if (event.childIds) {
+      filters.child_category = event.childIds;
+    } else if (event.parentIds) {
+      filters.parent_category = event.parentIds;
     }
-
+    this.currentPage = 1;
     this.loadProducts(filters);
   }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    const offset = (page - 1) * this.itemsPerPage;
+    this.loadProducts({ limit: this.itemsPerPage, offset, ordering: '-updated_at' });
+  }
+
 }

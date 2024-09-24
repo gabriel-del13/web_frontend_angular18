@@ -118,19 +118,17 @@ export class ProductsComponent implements OnInit {
     this.loadProducts();
   }
 
-  onAddToFavorites(productId: number) {
+  addToFavorites(productId: number) {
     this.favoriteService.addToFavorites(productId).subscribe({
-      next: () => {
-        console.log('Product added to favorites');
-        // Aquí puedes agregar lógica adicional, como actualizar la UI o mostrar un mensaje de éxito
+      next: (response) => {
+        console.log('Producto agregado a favoritos', response);
+        // Aquí puedes añadir lógica adicional, como mostrar un mensaje de éxito
       },
       error: (error) => {
-        console.error('Error adding to favorites:', error);
+        console.error('Error al agregar a favoritos', error);
         // Aquí puedes manejar el error, como mostrar un mensaje al usuario
       }
     });
   }
-
-
 
 }

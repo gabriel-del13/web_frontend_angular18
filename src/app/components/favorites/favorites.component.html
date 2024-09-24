@@ -1,16 +1,43 @@
-<div class="favorites-container">
-  <h2>Mis Favoritos</h2>
-  <div *ngIf="loading" class="loading-message">Cargando tus favoritos...</div> <!-- Indicador de carga -->
-  <div *ngIf="error" class="error-message">{{ error }}</div>
-  <div *ngIf="favorites.length === 0 && !error" class="no-favorites-message">No tienes productos en tus favoritos.</div>
-  <div class="favorites-list" *ngIf="!loading && favorites.length > 0">
-    <div *ngFor="let favorite of favorites" class="favorite-item">
-      <h3>{{ favorite.name_product }}</h3> <!-- Acceder directamente a name_product -->
-      <p>{{ favorite.description }}</p>
-      <p>Precio: {{ favorite.price | currency }}</p>
-      <div *ngFor="let image of favorite.images">
-        <img [src]="image.image" alt="Imagen del producto" />
+<app-header></app-header>
+<div class="p-3">
+  <h2 class="text-2xl font-bold mb-4 dark:text-white">Mis Favoritos</h2>
+  
+  <div *ngIf="loading" class="text-center py-4 dark:text-white">
+    Cargando tus favoritos...
+  </div>
+  
+  <div *ngIf="error" class="text-center py-4 text-red-500">
+    {{ error }}
+  </div>
+  
+  <div *ngIf="favorites.length === 0 && !error" class="text-center py-4 dark:text-white">
+    No tienes productos en tus favoritos.
+  </div>
+  
+  <div *ngIf="!loading && favorites.length > 0" class="space-y-4">
+    <div *ngFor="let favorite of favorites" class="flex flex-col sm:flex-row dark:bg-[#1f2937] rounded-lg overflow-hidden shadow-md">
+      <!-- Imagen -->
+      <div class="w-64 sm:w-1/3 h-64 flex-shrink-0">
+        <img
+          [src]="favorite.images && favorite.images.length > 0 ? favorite.images[0].image : '/placeholder-image.jpg'"
+          [alt]="favorite.name_product"
+          class="w-auto h-auto object-cover"
+        >
+      </div>
+      <!-- Información del producto -->
+      <div class="w-full sm:w-2/3 p-4 flex flex-col justify-between">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{{ favorite.name_product }}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">{{ favorite.description }}</p>
+        </div>
+        <div>
+          <p class="text-xl font-bold text-gray-900 dark:text-red-500 mb-2">{{ favorite.price | currency }}</p>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm">
+            Ver Detalles
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<app-footer></app-footer>

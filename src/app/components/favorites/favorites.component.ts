@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FavoriteService } from '../../services/apps/favorite.service';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from "../main/pages/header/header.component";
+import { FooterComponent } from "../main/pages/footer/footer.component";
 
 
 export interface Favorite {
@@ -26,7 +28,7 @@ export interface FavoritesResponse {
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent, FooterComponent],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.css'
 })

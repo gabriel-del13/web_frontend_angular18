@@ -27,9 +27,7 @@ export class DesktopProductComponent {
   @Output() pageChange = new EventEmitter<number>();
   @Output() addToFavorites = new EventEmitter<number>();
 
-
   constructor(
-
   ) {} 
 
   //Se utiliza para emitar el evento hacia el componente padre (una parent category o child category fue seleccionada)
@@ -65,4 +63,5 @@ export class DesktopProductComponent {
   onAddToFavorites(productId: number) {
     this.addToFavorites.emit(productId);
   }
+
 }

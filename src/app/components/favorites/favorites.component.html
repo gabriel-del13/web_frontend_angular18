@@ -1,1 +1,16 @@
-<p>favorites works!</p>
+<div class="favorites-container">
+  <h2>Mis Favoritos</h2>
+  <div *ngIf="loading" class="loading-message">Cargando tus favoritos...</div> <!-- Indicador de carga -->
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+  <div *ngIf="favorites.length === 0 && !error" class="no-favorites-message">No tienes productos en tus favoritos.</div>
+  <div class="favorites-list" *ngIf="!loading && favorites.length > 0">
+    <div *ngFor="let favorite of favorites" class="favorite-item">
+      <h3>{{ favorite.name_product }}</h3> <!-- Acceder directamente a name_product -->
+      <p>{{ favorite.description }}</p>
+      <p>Precio: {{ favorite.price | currency }}</p>
+      <div *ngFor="let image of favorite.images">
+        <img [src]="image.image" alt="Imagen del producto" />
+      </div>
+    </div>
+  </div>
+</div>

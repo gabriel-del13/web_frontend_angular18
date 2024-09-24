@@ -1,0 +1,89 @@
+
+<style>
+    .catalog-wrapper {
+      position: relative;
+      padding-bottom: 20px;
+    }
+    .catalog-container {
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+    .catalog-container::-webkit-scrollbar {
+      display: none;
+    }
+    .scroll-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: #f0f0f0;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .scroll-thumb {
+      height: 100%;
+      background: #888;
+      border-radius: 5px;
+      cursor: pointer;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: transform 0.1s ease-out;
+    }
+    
+    /* Ocultar la barra de desplazamiento en pantallas pequeñas */
+    @media (max-width: 900px) {
+      .scroll-bar {
+        display: none;
+      }
+    }
+    </style>
+    
+    
+    <div class=" bg-indigo-200 dark:bg-[#151c25]">
+      <br>
+      <div class="container mx-auto px-4 py-8 ">
+        @if (products.length > 0) {
+          <h2 class="text-6xl font-bold text-center mb-8 text-gray-800 dark:text-white">
+            {{ products[0].child_category.parent_category }}
+          </h2>
+        }
+      </div>
+    
+      <div class="catalog-wrapper dark:bg-gray-800" id="PC">
+        <br>
+          <div #catalogContainer class="catalog-container flex flex-nowrap space-x-4 pb-4">
+            @for (product of products; let i=$index; track product.name_product) {
+              <div class="flex-none w-64 sm:w-72  ">
+                <a href="" class="c-card block bg-white  shadow-md hover:shadow-xl transition duration-500 hover:scale-110 rounded-lg overflow-hidden">
+                  <div class="relative pb-48 overflow-hidden ">
+                    <img class="absolute inset-0 w-full object-cover " [src]="product.images[0].image_url" [alt]="product.name_product">
+                  </div>
+                  <div class="p-4 dark:text-white dark:bg-[#151c25]">
+                    <h6 class="text-xs dark:text-white text-gray-600">{{ product.child_category.parent_category }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;               
+                      <!-- Mostrar "Nuevo" solo para el primer producto -->
+                      @if (i === 0) {
+                        <span class="text-green-500">Nuevo</span>
+                      }
+    
+                    </h6>
+                    <h2 class="text-lg font-semibold">{{ product.name_product }}</h2>
+                  </div>
+                  <div class="p-4 border-t border-b text-xs text-gray-700 dark:bg-[#151c25]">
+                    <div class="mt-3 flex items-center dark:text-white dark:bg-[#151c25]">
+                      <span class="text-sm font-semibold "></span>&nbsp;<span class="font-bold text-xl">{{ product.price | currency }}</span>
+                    </div>     
+                  </div>
+                </a>
+              </div>
+            }
+          </div>
+          <div class="scroll-bar hidden md:block">
+            <div #scrollThumb class="scroll-thumb" (mousedown)="onThumbMouseDown($event)"></div>
+          </div>
+      </div>
+    </div>

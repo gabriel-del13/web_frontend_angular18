@@ -12,10 +12,14 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   private getHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
+    const token = localStorage.getItem('authToken');
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Token ${token}`);
+    }
+    return headers;
   }
+  
 
   get(endpoint: string, params?: {[param: string]: any}): Observable<any> {
     let httpParams = new HttpParams();

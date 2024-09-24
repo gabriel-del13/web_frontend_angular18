@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { DarkModeToggleComponent } from '../../main/pages/header/dark-mode-toggle/dark-mode-toggle.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,13 +20,13 @@ export class LoginComponent {
   errorMessage: string = '';
 
   constructor(
-    private loginService: LoginService,
+    private authService: AuthService,
     private router: Router,
   ) { }
   
   onLogin() {
     this.errorMessage = ''; // Limpiar mensaje de error anterior
-    this.loginService.login(this.loginCredentials).subscribe({
+    this.authService.login(this.loginCredentials).subscribe({
       next: (response) => {
         console.log('Login exitoso', response);
         localStorage.setItem('authToken', response.token);

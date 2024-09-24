@@ -28,18 +28,35 @@
   <div class="toggle w-full text-end custom:flex custom:w-auto px-2 py-2 custom:rounded" [class.hidden]="isMenuHidden">
     <div class="flex justify-end">
       <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8 flex-1 justify-end justify-self-end ">
-        <a class="text-black hover:text-cyan-200 dark:hover:text-teal-600 text-sm font-bold flex items-center dark:text-white" routerLink="/login">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd" />
-          </svg>
+        <ng-container *ngIf="!isLoggedIn; else loggedInButtons">
+
+          <a class="text-black hover:text-cyan-200 dark:hover:text-teal-600 text-sm font-bold flex items-center dark:text-white" routerLink="/login">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
             Login
-        </a>
-        <a class="text-white bg-gray-800 hover:bg-gray-900 dark:bg-[#64a0fd] dark:hover:bg-[#3b5e96] inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm dark:text-black" routerLink="/register">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
-          </svg>
+          </a>
+          <a class="text-white bg-gray-800 hover:bg-gray-900 dark:bg-[#64a0fd] dark:hover:bg-[#3b5e96] inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm dark:text-black" routerLink="/register">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+            </svg>
             Sign up
-        </a>
+          </a>
+        </ng-container>
+        <ng-template #loggedInButtons>
+          <a class="text-black hover:text-cyan-200 dark:hover:text-teal-600 text-sm font-bold flex items-center dark:text-white" routerLink="/favorites">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+            </svg>
+            Wishlist
+          </a>
+          <button (click)="logout()" class="text-white bg-gray-800 hover:bg-gray-900 dark:bg-[#64a0fd] dark:hover:bg-[#3b5e96] inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm dark:text-black">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" />
+            </svg>
+            Logout
+          </button>
+        </ng-template>
       </div>
     </div>
   </div>

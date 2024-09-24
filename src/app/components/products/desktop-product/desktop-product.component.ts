@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from "./search-bar/search-bar.component";
 import { MainComponent } from "../../main/main.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
+import { FavoriteService } from '../../../services/apps/favorite.service';
 
 
 @Component({
@@ -24,8 +25,12 @@ export class DesktopProductComponent {
 
   @Output() categorySelected = new EventEmitter<{parentIds: number[], childIds: number[]}>();
   @Output() pageChange = new EventEmitter<number>();
+  @Output() addToFavorites = new EventEmitter<number>();
 
-  constructor() {} 
+
+  constructor(
+
+  ) {} 
 
   //Se utiliza para emitar el evento hacia el componente padre (una parent category o child category fue seleccionada)
   onCategorySelected(event: {parentIds: number[], childIds: number[]}) {
@@ -55,5 +60,9 @@ export class DesktopProductComponent {
       }
     }
     return visiblePages;
+  }
+
+  onAddToFavorites(productId: number) {
+    this.addToFavorites.emit(productId);
   }
 }

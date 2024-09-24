@@ -34,7 +34,6 @@ export const routes: Routes = [
        */
     ]
   },
-  { path: 'abc', component: DesktopProductComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'favorites', component: FavoritesComponent },
 

@@ -9,6 +9,7 @@ import { ScreenSizeService } from '../../services/apps/screen-size.service';
 import { MobileProductComponent } from "./mobile-product/mobile-product.component";
 import { DesktopProductComponent } from "./desktop-product/desktop-product.component";
 import { SearchBarComponent } from "./desktop-product/search-bar/search-bar.component";
+import { FavoriteService } from '../../services/apps/favorite.service';
 
 
 @Component({
@@ -41,7 +42,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private screenSizeService: ScreenSizeService
+    private screenSizeService: ScreenSizeService,
+    private favoriteService: FavoriteService,
   ) {
     this.isMobile$ = this.screenSizeService.isMobile$;
   }
@@ -116,6 +118,18 @@ export class ProductsComponent implements OnInit {
     this.loadProducts();
   }
 
+  onAddToFavorites(productId: number) {
+    this.favoriteService.addToFavorites(productId).subscribe({
+      next: () => {
+        console.log('Product added to favorites');
+        // Aquí puedes agregar lógica adicional, como actualizar la UI o mostrar un mensaje de éxito
+      },
+      error: (error) => {
+        console.error('Error adding to favorites:', error);
+        // Aquí puedes manejar el error, como mostrar un mensaje al usuario
+      }
+    });
+  }
 
 
 

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DarkModeToggleComponent } from '../header/dark-mode-toggle/dark-mode-toggle.component';
+import { AuthService } from '../../../../services/auth.service';
+
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,24 @@ import { DarkModeToggleComponent } from '../header/dark-mode-toggle/dark-mode-to
 })
 export class HeaderComponent {
   isMenuHidden = true;
+  isLoggedIn = false;
 
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
+
+  ngOnInit() {
+    this.authService.isLoggedIn$.subscribe(
+      isLoggedIn => this.isLoggedIn = isLoggedIn
+    );
+  }
+  
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+  
   toggleMenu() {
     this.isMenuHidden = !this.isMenuHidden;
   }

@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './sectionproducts.component.html',
 })
 export class SectionproductsComponent {
+  
 
 }

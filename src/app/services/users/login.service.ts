@@ -10,9 +10,6 @@ export class LoginService {
 
   constructor(private apiService: ApiService) { }
 
-  login(credentials: any): Observable<any> {
-    return this.apiService.post(this.endpoint, credentials);
-  }
 
   googleLogin(token: string): Observable<any> {
     return this.apiService.post(`${this.endpoint}/google`, { token });

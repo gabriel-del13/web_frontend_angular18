@@ -3,6 +3,8 @@ import { FavoriteService } from '../../services/apps/favorite.service';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "../main/pages/header/header.component";
 import { FooterComponent } from "../main/pages/footer/footer.component";
+import { RouterLink } from '@angular/router';
+import { ProductInterface } from '../products/interface/products.interface';
 
 
 export interface Favorite {
@@ -28,19 +30,20 @@ export interface FavoritesResponse {
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, FooterComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent, RouterLink],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.css'
 })
 export class FavoritesComponent {
   favorites: Favorite[] = [];
+  product: ProductInterface[] = [];
   loading: boolean = false
   error: string | null = null;
   notification: { message: string, type: 'success' | 'error' } | null = null;
 
   
 
-  constructor(private favoritesService: FavoriteService) { }
+  constructor(private favoritesService: FavoriteService,) { }
 
   ngOnInit() {
     this.loadFavorites();

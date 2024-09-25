@@ -64,8 +64,9 @@ export class DesktopProductComponent {
     return visiblePages;
   }
 
-  onAddToFavorites(productId: number) {
-    event?.preventDefault();
+  onAddToFavorites(event: Event, productId: number) {
+    event.preventDefault();
+    event.stopPropagation
     this.addToFavorites.emit(productId);
     this.showNotification('Producto agregado a favoritos', 'success');
 

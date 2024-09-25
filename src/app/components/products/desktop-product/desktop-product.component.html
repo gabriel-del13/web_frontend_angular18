@@ -12,7 +12,12 @@
           class="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 justify-center gap-6 mt-10 mb-5">
           <div *ngFor="let product of products"
             class="w-full max-w-[280px] bg-white dark:bg-gray-800 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-            <a href="#">
+            <div *ngIf="notification"
+            [ngClass]="{'bg-green-500': notification.type === 'success', 'bg-red-500': notification.type === 'error'}"
+            class="fixed top-0 left-0 right-0 p-4 text-white text-center z-50">
+            {{ notification.message }}
+          </div>
+            <a [routerLink]="['/products/items', product.id]">
               <img
                 [src]="product.images && product.images.length > 0 ? product.images[0].image_url : '/placeholder-image.jpg'"
                 [alt]="product.name_product" class="h-80 w-72 object-cover rounded-t-xl" />
@@ -23,9 +28,11 @@
                 <div class="flex items-center justify-between">
                   <p class="text-lg font-semibold text-black dark:text-white cursor-auto my-3">{{ product.price |
                     currency }}</p>
-                  <button (click)="onAddToFavorites(product.id)" class=" text-gray-400 hover:text-red-500 transition-colors duration-200 focus:outline-none">
+            
+                  <button (click)="onAddToFavorites(product.id)"
+                    class="text-gray-400 hover:text-red-500 transition-colors duration-200 focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                      stroke="currentColor">
+                    stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>

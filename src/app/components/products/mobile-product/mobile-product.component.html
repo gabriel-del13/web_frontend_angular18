@@ -1,6 +1,11 @@
 <div class="dark:bg-gray-600">
   <br>
   <div class="relative w-full flex items-center space-x-4">
+    <div *ngIf="notification"
+            [ngClass]="{'bg-green-500': notification.type === 'success', 'bg-red-500': notification.type === 'error'}"
+            class="fixed top-0 left-0 right-0 p-4 text-white text-center z-50">
+            {{ notification.message }}
+          </div>
     <!-- Dropdown Container -->
     <div class="relative">
       <!-- Dropdown Button -->
@@ -78,8 +83,9 @@
              'border-red-500': product.status === 'AGOTADO',
              'border-yellow-500': product.status === 'PRÓXIMAMENTE'
            }">
+
         <!-- Botón de favoritos -->
-        <button
+        <button (click)="onAddToFavorites(product.id)"
           class="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition-colors duration-200 focus:outline-none z-10">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -108,7 +114,7 @@
             <!-- Cantidad disponible -->
             <p class="text-xs text-gray-600 dark:text-white">Available: {{ product.available_quantity }}</p>
             <!-- Botón para ver detalles -->
-            <button [routerLink]="['/product', product.id]"
+            <button [routerLink]="['/products/items', product.id]"
               class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 sm:py-2 sm:px-4 rounded text-sm">
               View Details
             </button>

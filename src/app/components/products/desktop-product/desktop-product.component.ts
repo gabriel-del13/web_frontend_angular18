@@ -5,14 +5,16 @@ import { SearchBarComponent } from "./search-bar/search-bar.component";
 import { MainComponent } from "../../main/main.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { FavoriteService } from '../../../services/apps/favorite.service';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-desktop-product',
   standalone: true,
-  imports: [CommonModule, MainComponent, SidebarComponent, SearchBarComponent],
+  imports: [CommonModule, MainComponent, SidebarComponent, SearchBarComponent, RouterLink],
   templateUrl: './desktop-product.component.html',})
 export class DesktopProductComponent {
+  
   
   @Input() products: ProductInterface[] = [];
   @Input() loading = false;
@@ -21,6 +23,8 @@ export class DesktopProductComponent {
   @Input() itemsPerPage = 15;
   @Input() totalItems = 0;
   @Input() totalPages = 0;
+  notification: { message: string, type: 'success' | 'error' } | null = null;
+
 
 
   @Output() categorySelected = new EventEmitter<{parentIds: number[], childIds: number[]}>();
@@ -61,7 +65,18 @@ export class DesktopProductComponent {
   }
 
   onAddToFavorites(productId: number) {
+    event?.preventDefault();
     this.addToFavorites.emit(productId);
+    this.showNotification('Producto agregado a favoritos', 'success');
+
   }
 
+  showNotification(message: string, type: 'success' | 'error') {
+    this.notification = { message, type };
+    setTimeout(() => {
+      this.notification = null;
+    }, 3000); // La notificación desaparecerá después de 3 segundos
+  }
+
+    
 }

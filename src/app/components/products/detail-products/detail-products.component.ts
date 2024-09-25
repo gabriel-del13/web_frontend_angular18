@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService } from '../../../services/apps/products.service';
 import { ProductInterface } from '../interface/products.interface';
 import { CommonModule } from '@angular/common';
@@ -7,37 +7,36 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-detail-products',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './detail-products.component.html',
   styleUrl: './detail-products.component.css'
 })
 export class DetailProductsComponent {
-  product: ProductInterface | null = null;
+  productId: number = 0; // Inicializamos con un valor por defecto
+  product: ProductInterface | null = null; // Aquí almacenamos el producto
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService
   ) {}
 
-  ngOnInit() {
-    // Convirtiend el id string a id número, ya que por defecto viene como string aunque se establezca como number en el product interface
-    const id = +this.route.snapshot.paramMap.get('id')!; // "+" convierte a number
-
-    if (id) {
-      this.getProductById(id);
-    }
+  ngOnInit(): void {
+    // Captura el ID desde la ruta
+    this.productId = +this.route.snapshot.paramMap.get('id')!;
+    
+    // Llama al servicio para obtener los detalles del producto
+    this.loadProductDetails();
   }
 
-  getProductById(id: number) {
-    this.productService.getProductById(id).subscribe(
-      product => {
-        this.product = product;
-        console.log(product);  // Para depurar
+  loadProductDetails(): void {
+    this.productService.getProductById(this.productId).subscribe({
+      next: (data: ProductInterface) => {
+        this.product = data;
       },
-      error => {
-        console.error('Error al obtener el producto', error);
+      error: (err) => {
+        console.error('Error loading product details:', err);
       }
-    );
+    });
   }
 }
 

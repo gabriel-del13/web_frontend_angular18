@@ -36,6 +36,8 @@ export class FavoritesComponent {
   favorites: Favorite[] = [];
   loading: boolean = false
   error: string | null = null;
+  notification: { message: string, type: 'success' | 'error' } | null = null;
+
   
 
   constructor(private favoritesService: FavoriteService) { }
@@ -65,9 +67,26 @@ export class FavoritesComponent {
   }
 
   removeFromFavorites(favoriteId: number) {
-    this.favoritesService.removeFromFavorites(favoriteId).subscribe(
-      () => this.loadFavorites()
-    );
+    this.loading = true;
+    this.favoritesService.removeFromFavorites(favoriteId).subscribe({
+      next: () => {
+        console.log('Producto eliminado de favoritos');
+        this.showNotification('Producto eliminado de favoritos correctamente', 'success');
+        this.loadFavorites(); // Recargar la lista de favoritos
+      },
+      error: (err) => {
+        console.error('Error removing favorite:', err);
+        this.showNotification('Error al eliminar el producto de favoritos', 'error');
+        this.loading = false;
+      }
+    });
+  }
+
+  showNotification(message: string, type: 'success' | 'error') {
+    this.notification = { message, type };
+    setTimeout(() => {
+      this.notification = null;
+    }, 3000); // La notificación desaparecerá después de 3 segundos
   }
 }
 

@@ -3,12 +3,13 @@ import { Component, AfterViewInit, ViewChild, ElementRef, HostListener, NgZone  
 import { ChildCategoryInterface, ProductInterface } from '../../../products/interface/products.interface';
 import { ProductService } from '../../../../services/apps/products.service';
 import { CategoriesService } from '../../../../services/apps/categories.service';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-products-catalog',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './products-catalog.component.html',
 })
 export class ProductsCatalogComponent implements AfterViewInit {

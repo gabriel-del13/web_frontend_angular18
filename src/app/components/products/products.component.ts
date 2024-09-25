@@ -10,12 +10,13 @@ import { MobileProductComponent } from "./mobile-product/mobile-product.componen
 import { DesktopProductComponent } from "./desktop-product/desktop-product.component";
 import { SearchBarComponent } from "./desktop-product/search-bar/search-bar.component";
 import { FavoriteService } from '../../services/apps/favorite.service';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, FooterComponent, MobileProductComponent, DesktopProductComponent, SearchBarComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent, MobileProductComponent, DesktopProductComponent, SearchBarComponent, RouterLink],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })

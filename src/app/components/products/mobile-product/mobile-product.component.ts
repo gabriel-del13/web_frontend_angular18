@@ -30,10 +30,14 @@ export class MobileProductComponent {
   @Input() error: string | null = null;
   @Input() currentPage: number = 1;
   @Input() totalPages: number = 0;
-  @Output() categorySelected = new EventEmitter<{parentIds: number[], childIds: number[]}>();
+  notification: { message: string, type: 'success' | 'error' } | null = null;
 
+
+  @Output() categorySelected = new EventEmitter<{parentIds: number[], childIds: number[]}>();
   @Output() pageChange = new EventEmitter<number>();
   @Output() search = new EventEmitter<string>();
+  @Output() addToFavorites = new EventEmitter<number>();
+
   
   ngOnInit(): void {
     this.loadParentCategories();
@@ -120,6 +124,20 @@ export class MobileProductComponent {
       parentIds: this.selectedParentIds,
       childIds: this.selectedChildIds
     });
+  }
+
+  onAddToFavorites(productId: number) {
+    event?.preventDefault();
+    this.addToFavorites.emit(productId);
+    this.showNotification('Producto agregado a favoritos', 'success');
+
+  }
+
+  showNotification(message: string, type: 'success' | 'error') {
+    this.notification = { message, type };
+    setTimeout(() => {
+      this.notification = null;
+    }, 3000); // La notificación desaparecerá después de 3 segundos
   }
 }
 

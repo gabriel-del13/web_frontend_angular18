@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, AfterViewInit, ViewChild, ElementRef, HostListener, NgZone  } from '@angular/core';
 import { ProductInterface } from '../../../products/interface/products.interface';
 import { ProductService } from '../../../../services/apps/products.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products-catalog-tree',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './products-catalog-tree.component.html',
 })
 export class ProductsCatalogTreeComponent {
@@ -27,7 +28,7 @@ export class ProductsCatalogTreeComponent {
 
   ngOnInit() {
     // Filtrar por ID de Parent Category, limitarlo a 3 y ordenar de mas nuevo a mas viejo
-    this.loadProducts( {parent_category: '4', limit: 7, ordering: '-updated_at'} );
+    this.loadProducts( {parent_category: '2', limit: 7, ordering: '-updated_at'} );
   }
 
   loadProducts(filters?:any) {

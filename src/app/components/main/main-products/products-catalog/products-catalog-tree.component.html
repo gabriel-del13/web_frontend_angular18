@@ -59,7 +59,7 @@
           <div #catalogContainer class="catalog-container flex flex-nowrap space-x-4 pb-4">
             @for (product of products; let i=$index; track product.name_product) {
               <div class="flex-none w-64 sm:w-72  ">
-                <a href="" class="c-card block bg-white  shadow-md hover:shadow-xl transition duration-500 hover:scale-110 rounded-lg overflow-hidden">
+                <a [routerLink]="['/products/items', product.id]" class="c-card block bg-white  shadow-md hover:shadow-xl transition duration-500 hover:scale-110 rounded-lg overflow-hidden">
                   <div class="relative pb-48 overflow-hidden ">
                     <img class="absolute inset-0 w-full object-cover " [src]="product.images[0].image_url" [alt]="product.name_product">
                   </div>

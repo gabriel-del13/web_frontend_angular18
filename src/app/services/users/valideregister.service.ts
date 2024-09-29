@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ValideRegisterService {
-  private apiUrl = 'http://127.0.0.1:8000/api/users/validatereg/';
+  private apiUrl = 'https://webbackenddjango-production.up.railway.app/api/users/validatereg/';
 
   constructor(private http: HttpClient) { }
 

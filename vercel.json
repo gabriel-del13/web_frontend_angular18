@@ -5,7 +5,7 @@
          "src": "package.json",
          "use": "@vercel/static-build",
          "config": {
-           "distDir": "dist/[YOUR_PROJECT_NAME]"
+           "distDir": "dist/[frontend_angular18]"
          }
        }
      ],

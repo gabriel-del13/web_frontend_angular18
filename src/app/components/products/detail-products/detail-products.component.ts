@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService } from '../../../services/apps/products.service';
-import { ProductInterface } from '../interface/products.interface';
-import { CommonModule } from '@angular/common';
+import { ProductImageInterface, ProductInterface } from '../interface/products.interface';
+import { CommonModule, Location } from '@angular/common';
 import { HeaderComponent } from "../../main/pages/header/header.component";
 import { FooterComponent } from "../../main/pages/footer/footer.component";
 import { FavoriteService } from '../../../services/apps/favorite.service';
@@ -18,12 +18,14 @@ export class DetailProductsComponent {
   productId: number = 0; // Inicializamos con un valor por defecto
   product: ProductInterface | null = null; // Aquí almacenamos el producto
   notification: { message: string, type: 'success' | 'error' } | null = null;
+  currentImageIndex: number = 0;
 
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService, 
     private favoriteService: FavoriteService,
+    private location: Location,
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,27 @@ export class DetailProductsComponent {
     });
   }
 
+  get images(): ProductImageInterface[] {
+    return this.product?.images || [];
+  }
+  setCurrentImage(index: number) {
+    if (index >= 0 && index < this.images.length) {
+      this.currentImageIndex = index;
+    }
+  }
+
+  previousImage() {
+    if (this.images.length > 0) {
+      this.currentImageIndex = (this.currentImageIndex - 1 + this.images.length) % this.images.length;
+    }
+  }
+
+  nextImage() {
+    if (this.images.length > 0) {
+      this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
+    }
+  }
+  
   onAddToFavorites(event: Event, productId: number) {
     event.preventDefault();
 
@@ -61,7 +84,9 @@ export class DetailProductsComponent {
     });
   }
 
-
+  goBack() {
+    this.location.back();
+  }
 
   showNotification(message: string, type: 'success' | 'error') {
     this.notification = { message, type };

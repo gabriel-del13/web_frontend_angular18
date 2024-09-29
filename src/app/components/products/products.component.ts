@@ -51,6 +51,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.setupSearch();
+    this.loadLastPage();
     this.loadProducts();
   }
 
@@ -61,6 +62,7 @@ export class ProductsComponent implements OnInit {
     ).subscribe(term => {
       this.currentFilters.search = term;
       this.currentFilters.offset = 0;
+      this.currentPage = 1;
       this.loadProducts();
     });
   }
@@ -69,14 +71,23 @@ export class ProductsComponent implements OnInit {
     this.searchTerms.next(term);
   }
 
-  loadProducts() {
+  onOrder(orderBy: string) {
+    this.loadProducts(this.currentFilters.search, orderBy);
+  }
+
+  loadProducts(searchTerm?: string, orderBy?: string) {
     this.loading = true;
+    this.currentFilters = {
+      ...this.currentFilters,
+      ordering: orderBy
+    };
     this.productService.getProducts(this.currentFilters).subscribe({
       next: (data) => {
         this.products = data.results;
         this.totalItems = data.count;
         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
         this.loading = false;
+        this.saveCurrentPage();
       },
       error: (err) => {
         console.error('Error loading products:', err);
@@ -130,6 +141,18 @@ export class ProductsComponent implements OnInit {
         // Aquí puedes manejar el error, como mostrar un mensaje al usuario
       }
     });
+  }
+
+  private loadLastPage() {
+    const lastPage = localStorage.getItem('lastProductsPage');
+    if (lastPage) {
+      this.currentPage = parseInt(lastPage, 10);
+      this.currentFilters.offset = (this.currentPage - 1) * this.itemsPerPage;
+    }
+  }
+
+  private saveCurrentPage() {
+    localStorage.setItem('lastProductsPage', this.currentPage.toString());
   }
 
 }

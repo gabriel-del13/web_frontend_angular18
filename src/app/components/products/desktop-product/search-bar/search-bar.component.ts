@@ -9,15 +9,26 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './search-bar.component.html',
 })
 export class SearchBarComponent {
-
   @Output() search = new EventEmitter<string>();
-  
-  searchTerm: string = '';
+  @Output() order = new EventEmitter<string>();
 
-  onSearch() {
+  searchTerm: string = '';
+  orderingFields = [
+    { value: 'name_product', label: 'Nombre del Producto' },
+    { value: 'updated_at', label: 'Fecha de Actualización' },
+    { value: 'price', label: 'Precio' },
+    { value: 'available_quantity', label: 'Cantidad Disponible' }
+  ];
+  selectedOrder: string = '';
+
+  onSearch(event?: Event) {
     if (event) {
-      event.preventDefault();  // Evita el comportamiento por defecto solo si el evento existe
+      event.preventDefault();
+    }
+    this.search.emit(this.searchTerm);
   }
-  this.search.emit(this.searchTerm)
+
+  onOrderChange() {
+    this.order.emit(this.selectedOrder);
   }
 }

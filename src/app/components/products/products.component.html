@@ -17,7 +17,10 @@
   <ng-template #desktopView>
     <div class=" bg-gray-100 dark:bg-[#151c25]">
       <div class="flex justify-center">      
-        <app-search-bar (search)="onSearch($event)"></app-search-bar>
+        <app-search-bar (search)="onSearch($event)"
+        (order)="onOrder($event)"
+        >
+        </app-search-bar>
       </div>
     <app-desktop-product 
     [products]="products"
@@ -29,7 +32,8 @@
     [totalItems]="totalItems"
     [totalPages]="totalPages"
     (pageChange)="onPageChange($event)"
-    (addToFavorites)="addToFavorites($event)">
+    (addToFavorites)="addToFavorites($event)"
+
     
     >
     </app-desktop-product>

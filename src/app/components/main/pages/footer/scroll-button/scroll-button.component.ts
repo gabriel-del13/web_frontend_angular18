@@ -7,21 +7,26 @@ import { Component, HostListener } from '@angular/core';
   templateUrl: './scroll-button.component.html',
 })
 export class ScrollButtonComponent {
+  public showButton: boolean = false;
+  private readonly SCROLL_THRESHOLD = 0.5; // 50% de la altura de la página
 
-public showButton: boolean = false;
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
+    const documentHeight = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.clientHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight
+    );
 
-@HostListener('window:scroll', [])
-onWindowScroll() {
-  const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
-  const body = document.body;
-  const html = document.documentElement;
-  const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-  const windowBottom = windowHeight + window.pageYOffset;
-
-  if (windowBottom >= docHeight) {
-    this.showButton = true;  // Mostrar el botón cuando se llega al final
-  } else {
-    this.showButton = false; // Ocultar el botón si no se ha llegado al final
+    // Mostrar el botón cuando se ha scrolleado más allá del umbral
+    this.showButton = scrollPosition > windowHeight * this.SCROLL_THRESHOLD;
   }
-}
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }
